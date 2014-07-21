@@ -1,0 +1,31 @@
+<?php
+$SkinSet['SkinName'] = "TFBB Skin";
+$SkinSet['SkinMaker'] = "Jcink";
+$SkinSet['MakerURL'] = "http://Jcink.com/";
+$SkinSet['CSS'] = "./skin/TFBB/CSS.css";
+$SkinSet['CSSHTML'] = "<style type=\"text/css\">\n<!--\n@import url(".$SkinSet['CSS'].");\n-->\n</style>";
+$SkinSet['Logo'] = "<img alt=\"".$Settings['board_name']."\" src=\"skin/TFBB/logo.png\" />";
+$SkinSet['CopyRight'] = "The Skin was made by <a href=\"".$SkinSet['MakerURL']."\" title=\"".$SkinSet['SkinMaker']."\">".$SkinSet['SkinMaker']."</a>";
+$SkinSet['CopyRightType'] = "CopyRight 1";
+$SkinSet['Toggle'] = "<img src=\"skin/TFBB/plus.gif\" alt=\"[&#43;]\" title=\"[&#43;]\" />";
+$SkinSet['ToggleExt'] = "&nbsp;";
+$SkinSet['PinTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB/pin.png\" alt=\"Pinned!\" title=\"Pinned Topic!\" /></div>";
+$SkinSet['ClosedTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB/lock.png\" alt=\"Closed!\" title=\"Closed Topic!\" /></div>";
+$SkinSet['TopicIcon'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB/topic.png\" alt=\"Topic\" title=\"Topic\" /></div>";
+$SkinSet['PinClosedTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB/pinlock.png\" alt=\"Closed!\" title=\"Closed!\" /></div>";
+$SkinSet['HotTopic'] = "<div style=\"text-align: center;\">&nbsp;</div>";
+$SkinSet['LineDivider'] = "&nbsp;&middot;&nbsp;";
+$SkinSet['LineDividerTopic'] = "&nbsp;&middot;&nbsp;";
+$SkinSet['Email'] = "Email";
+$SkinSet['WWW'] = "WWW";
+$SkinSet['PM'] = "PM";
+$SkinSet['TopicLayout'] = "Type 1";
+$SkinSet['AddReply'] = "Add Reply";
+$SkinSet['QuoteReply'] = "Quote Reply";
+$SkinSet['FastReply'] = "Fast Reply";
+$SkinSet['NewTopic'] = "New Topic";
+$SkinSet['ForumIcon'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB/forum.gif\" alt=\"Forum\" title=\"Forum\" /></div>";
+$SkinSet['TitleIcon'] = null;
+$SkinSet['NoAvatar'] = "skin/TFBB/NoAvatar.png";
+$SkinSet['NoAvatarSize'] = "100x100";
+?>

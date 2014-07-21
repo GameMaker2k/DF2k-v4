@@ -1,0 +1,212 @@
+@charset "utf-8";
+body {
+	font-family: Verdana, Tahoma, Arial, sans-serif; 
+	font-size: 11px; 
+	color: white; 
+	margin:1px 40px 0px 40px; 
+	background-color: black;
+}
+a:link, a:visited, a:active { 
+color: silver;
+text-decoration: none; 
+}
+a:hover { 
+color: gray; 
+text-decoration: none 
+}
+.copyright { 
+text-align: center;
+font-family: Sans-Serif; 
+font-size: 12px; 
+line-height: 11px; 
+color: #FFF; 
+}
+.crtable1 { 
+background-color: #343434; 
+font-size: 11px;
+font-family: verdana, arial, sans-serif;
+color: #FFFFFF; 
+width: 100%;
+border: 1px solid #464646;
+border-collapse: collapse; 
+}
+.crtable2 { 
+background-color: #1F1F1F;
+font-size: 11px;
+text-align: center;
+border: 1px solid #464646;
+}
+.crtable3 { 
+background-color: #343434;
+font-size: 11px;
+text-align: left;
+border: 1px solid #464646;
+}
+.noborder { 
+border: 0px;
+}
+img {
+	border: 0px;
+    vertical-align: middle;
+}
+form {
+text-align: center;
+}
+.NavBar1 { 
+background-color: #343434; 
+font-size: 11px;
+font-family: verdana, arial, sans-serif;
+color: #FFFFFF; 
+width: 100%;
+border: 1px solid #464646;
+border-collapse: collapse; 
+}
+.NavBar2 { 
+background-color: #1F1F1F;
+font-size: 11px;
+text-align: center;
+border: 1px solid #464646;
+}
+.NavBar3 { 
+background-color: #343434;
+font-size: 11px;
+text-align: left;
+border: 1px solid #464646;
+}
+.textleft {
+	font-size: 11px;
+	float: left;
+}
+.textright {
+	font-size: 11px;
+	float: right;
+}
+.textcenter {
+	font-size: 11px;
+	text-align: center;
+}
+.Table1 { 
+background-color: #343434; 
+font-size: 11px;
+font-family: verdana, arial, sans-serif;  
+color: #FFFFFF; 
+width: 100%;
+border: 1px solid #464646;
+border-collapse: collapse; 
+}
+.Table2 { 
+background-color: #1F1F1F;
+background-image: url(grad.gif);
+font-size: 11px;
+font-family: verdana, arial, sans-serif;  
+color: #FFFFFF; 
+width: 100%;
+border: 1px solid #464646;
+}
+.TableRow1 { 
+background-color: #1F1F1F;
+background-image: url(grad.gif);
+border: 1px solid #464646;
+}
+.TableRow2 { 
+background-color: #1F1F1F;
+border: 1px solid #464646;
+}
+.TableRow3 { 
+background-color: #343434; 
+border: 1px solid #464646;
+}
+.TableRow4 { 
+background-color: #1F1F1F; 
+border: 1px solid #464646;
+}
+.CalRow1 { 
+background-color: #343434; 
+border: 1px solid #464646;
+}
+.CalRow2 { 
+background-color: #1F1F1F; 
+border: 1px solid #464646;
+}
+.TextBox { 
+background-color: #1F1F1F; 
+font-size: 11px; 
+font-family: Courier, Courier New, Verdana, Arial;   
+color: white; 
+border: 1px solid #464646;
+border-collapse: collapse; 
+font-size: 11px;
+}
+.HiddenTextBox {
+font-family: Courier, Courier New, Verdana, Arial, serif; 
+font-size: 10px; 
+color: #C0C0C0; 
+display: none;
+border: 2px outset black;
+border-width: 2px;
+border-bottom-color: #C0C0C0;
+border-left-color: #C0C0C0; 
+border-right-color: #C0C0C0; 
+border-top-color: #C0C0C0; 
+}
+.QuoteTop { 
+font-family: Verdana, Tahoma, Arial, sans-serif;
+font-size: 10px; 
+color: #A0A0A0; 
+}
+.QuoteBottom { 
+font-family: Courier, Courier New, Verdana, Arial, serif; 
+font-size: 12px; 
+color: #C0C0C0; 
+background-color: black; 
+border: 1px solid #000; 
+border-color: gray;
+padding-top: 2px; 
+padding-right: 2px; 
+padding-bottom: 2px; 
+padding-left: 2px 
+}
+.CodeTop  { 
+font-family: Verdana, Tahoma, Arial, sans-serif; 
+font-size: 10px; 
+color: #A0A0A0; 
+}
+.CodeBottom { 
+font-family: Courier, Courier New, Verdana, Arial;  
+font-size: 12px; 
+color: #C0C0C0; 
+background-color: Black; 
+border: 1px solid #000; 
+border-color: gray;
+padding-top: 2px; 
+padding-right: 2px; 
+padding-bottom: 2px; 
+padding-left: 2px 
+}
+.CodeBox { 
+width:500px; 
+height:100px; 
+white-space:pre; 
+overflow:auto; 
+border:3px outset black; 
+font-family: Courier, Courier New, Verdana, Arial, serif; 
+font-size: 15px; 
+}
+.Button { 
+background-color: #1F1F1F; 
+font-size: 11px; 
+font-family: Courier, Courier New, Verdana, Arial;   
+color: white; 
+border: 1px solid #464646;
+border-collapse: collapse; 
+font-size: 11px;
+}
+label {
+color: #e1e1e1;
+font-weight: bold; 
+cursor: pointer;
+}
+img {
+	border: 0px;
+    vertical-align: middle;
+}

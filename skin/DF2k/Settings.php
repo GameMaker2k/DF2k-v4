@@ -1,0 +1,31 @@
+<?php
+$SkinSet['SkinName'] = "DF2k Skin";
+$SkinSet['SkinMaker'] = "Cool Dude 2k";
+$SkinSet['MakerURL'] = "http://cooldude2k.co.funpic.org/";
+$SkinSet['CSS'] = "skin/DF2k/CSS.css";
+$SkinSet['CSSHTML'] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$SkinSet['CSS']."\" />";
+$SkinSet['Logo'] = "<img alt=\"".$Settings['board_name']."\" src=\"skin/DF2k/logo.png\" />";
+$SkinSet['CopyRight'] = "The Skin was made by <a href=\"".$SkinSet['MakerURL']."\" title=\"".$SkinSet['SkinMaker']."\">".$SkinSet['SkinMaker']."</a>";
+$SkinSet['CopyRightType'] = "CopyRight 1";
+$SkinSet['Toggle'] = "[&#35;]";
+$SkinSet['ToggleExt'] = null;
+$SkinSet['PinTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/DF2k/pin.png\" alt=\"Pinned!\" title=\"Pinned Topic!\" /></div>";
+$SkinSet['ClosedTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/DF2k/lock.png\" alt=\"Closed!\" title=\"Closed Topic!\" /></div>";
+$SkinSet['PinClosedTopic'] = "<div style=\"text-align: center;\"><img src=\"skin/DF2k/lock.png\" alt=\"Closed!\" title=\"Closed Topic!\" /></div>";
+$SkinSet['TopicIcon'] = "<div style=\"text-align: center;\">&nbsp;</div>";
+$SkinSet['HotTopic'] = "<div style=\"text-align: center;\">&nbsp;</div>";
+$SkinSet['Email'] = "Email";
+$SkinSet['WWW'] = "WWW";
+$SkinSet['PM'] = "PM";
+$SkinSet['TopicLayout'] = "Type 1";
+$SkinSet['AddReply'] = "<img src=\"skin/DF2k/reply.png\" alt=\"Add Reply\" title=\"Add Reply\" />";
+$SkinSet['FastReply'] = "<img src=\"skin/DF2k/fast.png\" alt=\"Fast Reply\" title=\"Fast Reply\" />";
+$SkinSet['QuoteReply'] = "Quote Reply";
+$SkinSet['NewTopic'] = "<img src=\"skin/DF2k/topic.png\" alt=\"New Topic\" title=\"New Topic\" />";
+$SkinSet['LineDivider'] = "&nbsp;|&nbsp;";
+$SkinSet['LineDividerTopic'] = "&nbsp;|&nbsp;";
+$SkinSet['ForumIcon'] = "<div style=\"text-align: center;\">[&yen;]</div>";
+$SkinSet['TitleIcon'] = null;
+$SkinSet['NoAvatar'] = "skin/DF2k/NoAvatar.png";
+$SkinSet['NoAvatarSize'] = "100x100";
+?>
