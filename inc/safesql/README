@@ -9,10 +9,10 @@ NAME:
     http://www.webmasterbase.com/article/794
 
 AUTHOR:
-    Monte Ohrt <monte@ispi.net>
+    Monte Ohrt (monte [at] ohrt [dot] com)
 
 LATEST VERSION:
-    2.1 - August 13, 2004
+    2.2 - March 27th, 2007
 
 SYNOPSIS:
 
@@ -56,7 +56,7 @@ DESCRIPTION:
     // we don't want the location clause unless $location has
     // a value, so we test for that and build the clause.
     if(!empty($location)) {
-        $location_clause = " and Location = '" . addslashes($location);
+        $location_clause = " and Location = '" . addslashes($location) . "'";
     } else {
         $location_clause = '';
     }
@@ -73,8 +73,8 @@ DESCRIPTION:
     $query_string = "select * from sections
         where SectionName ='" . addslashes($sec_name) . "'
         and id in ('" . implode("','",slash_array($section_ids)) . "')
-        and timestamp >= " . time() . "
-        $location_clause";
+        and timestamp >= " . time()
+        . $location_clause;
         
     // $query_string is now ready for use
     
@@ -173,8 +173,8 @@ USE INSTRUCTIONS:
 
 
     SafeSQL queries use printf style placeholders for your variable content.
-    Possible placeholders are %s, %i, %f, %c, %l, %q, %S, %I, %F, %C, %L, %Q.
-    Examples of each type are outlined below.
+    Possible placeholders are %s, %n, %i, %f, %c, %l, %q, %S, %N, %I, %F, %C,
+    %L, %Q. Examples of each type are outlined below.
 
     using %s
     --------
@@ -206,6 +206,38 @@ USE INSTRUCTIONS:
     Here the first %s is replace with $foobar, and the second %s is replaced
     with $foobar2. The number of placeholders must always match the number of
     variables passed, otherwise an error is reported.
+
+    using %n
+    --------
+
+    %n is similar to %s, except NULL is allowed. That is, string will be wrapped
+    within single quotes unless the value is the string NULL, in which case the
+    value will be left unchanged.
+
+    $foobar = 'mystring';
+    $safe_q = $safesql->query(
+                "insert into foo values(%n)'",
+                array($foobar)
+                );
+
+    RESULT QUERY:
+    insert into foo values('mystring')
+
+    In the above query, the %n placeholder will be replaced with the value of
+    $foobar, properly escaped, wrapped in single quotes.
+
+    $foobar = 'NULL';
+    $safe_q = $safesql->query(
+                "insert into foo values(%n)'",
+                array($foobar)
+                );
+
+    RESULT QUERY:
+    insert into foo values(NULL)
+
+    Here %n is is the string NULL, so the value is NOT wrapped in quotes, and
+    passed unchanged.
+
 
     using %i
     --------
@@ -313,7 +345,7 @@ USE INSTRUCTIONS:
     [ and    bar =  '%I' ]    
     [ and    bar =  '%F' ]    
     [ and    bar in (%C) ]    
-    [ and    bar in (%Q) and bar = '%S' ]    
+    [ and    bar in (%Q) or bar = '%S' ]    
     
     EOQ;
 
@@ -356,7 +388,7 @@ USE INSTRUCTIONS:
     bracketed segment delimiter), you need to pass this as a SafeSQL parameter:
 
     $safe_q = $safesql->query("select Date_Format(StartDate, '%s') as StartDate
-    from foo where bar = '%s'", array('%Y/%m/%d %H:%m:%s', $date));
+    from foo where bar = '%s'", array('%Y/%m/%d %H:%M:%S', $date));
 
 
 That is about it. If you have any questions, drop me a line.
