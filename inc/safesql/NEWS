@@ -1,15 +1,20 @@
+2.2 March 27th, 2007
+--------------------
+
+added %n and %N for handling quoted and (non-quoted) NULL values (monte)
+
 2.1 August 13, 2004
 -------------------
 
-fix bug with empty values not doing strict type checking
-add ability to put multiple tokens in a single set of braces
-add %l and %L for making comma separated list with no casting or quoting
+fix bug with empty values not doing strict type checking (monte)
+add ability to put multiple tokens in a single set of braces (monte)
+add %l and %L for making comma separated list with no casting or quoting (monte)
 
 2.0.1
 -----
 
-fix get_drop_values function, remove unnecessary parameter
-fix bug with escaping arrays in MySQL class extension
+fix get_drop_values function, remove unnecessary parameter (monte)
+fix bug with escaping arrays in MySQL class extension (monte)
 
 2.0 (December 23, 2003)
 -----------------------
