@@ -26,16 +26,16 @@ if ($_GET['Validate']=="RSS"||$_GET['validate']=="RSS") {
 	header('Location: http://validator.w3.org/feed/check.cgi?url='.urlencode('http://'.$_SERVER["HTTP_HOST"].$NEW["REQUEST_URI"])); }
 header("Content-type: application/xml");
 echo '<?xml version="1.0" encoding="iso-8859-15"?>'."\n\r";
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $query = $safesql->query("select * from ".$Settings['sqltable']."Help ORDER BY ID", array());
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 unset($safesql);
 $i=0;
 while ($i < $num) {
-$HelpID=mysql_result($result,$i,"ID");
-$HelpName=mysql_result($result,$i,"HelpName");
-$HelpText=mysql_result($result,$i,"HelpText");
+$HelpID=mysqli_result($result,$i,"ID");
+$HelpName=mysqli_result($result,$i,"HelpName");
+$HelpText=mysqli_result($result,$i,"HelpText");
 $One = $One.'<rdf:li rdf:resource="'.$BoardURL.'Help.php?act=Help&amp;id='.$HelpID.'"/>'."\n\r";
 $Two = $Two.'<item>'."\n\r".'<title>'.$HelpName.'</title>'."\n\r".'<description>'.$HelpName.'</description>'."\n\r".'<link>'.$BoardURL.'Help.php?act=Help&amp;id='.$HelpID.'</link>'."\n\r".'</item>'."\n\r";
 ++$i; }
@@ -48,7 +48,7 @@ header('Content-Disposition: attachment; filename="'.$Settings['board_name'].'.x
    <link><?php echo $BoardURL; ?></link>
    <language>en-us</language>
    <generator>Edit Plus v2.12</generator>
-   <copyright>Game Maker 2k© 2004</copyright>
+   <copyright>Game Maker 2kï¿œ 2004</copyright>
    <ttl>120</ttl>
    <image>
 	<url><?php echo $BoardURL; ?>Pics/xml.gif</url>
@@ -57,4 +57,4 @@ header('Content-Disposition: attachment; filename="'.$Settings['board_name'].'.x
    </image>
  <?php echo "\n\r".$Two."\n\r"; ?></channel>
 </rss>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>

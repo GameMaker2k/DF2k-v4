@@ -26,19 +26,19 @@ if ($_GET['Validate']=="RSS"||$_GET['validate']=="RSS") {
 	header('Location: http://validator.w3.org/feed/check.cgi?url='.urlencode('http://'.$_SERVER["HTTP_HOST"].$NEW["REQUEST_URI"])); }
 header("Content-type: application/xml");
 echo '<?xml version="1.0" encoding="iso-8859-15"?>'."\n\r";
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $query = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY Pinned DESC, LastUpdate DESC", array($_GET['id'],$_GET['CatID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 unset($safesql);
 $i=0;
 while ($i < $num) {
-$TopicID=mysql_result($result,$i,"ID");
-$CategoryID=mysql_result($result,$i,"CategoryID");
-$UsersID=mysql_result($result,$i,"UserID");
-$GuestName=mysql_result($result,$i,"GuestName");
-$TheTime=mysql_result($result,$i,"TimeStamp");
-$TopicName=mysql_result($result,$i,"TopicName");
+$TopicID=mysqli_result($result,$i,"ID");
+$CategoryID=mysqli_result($result,$i,"CategoryID");
+$UsersID=mysqli_result($result,$i,"UserID");
+$GuestName=mysqli_result($result,$i,"GuestName");
+$TheTime=mysqli_result($result,$i,"TimeStamp");
+$TopicName=mysqli_result($result,$i,"TopicName");
 $One = $One.'<rdf:li rdf:resource="'.$BoardURL.'Topic.php?id='.$TopicID.'&amp;ForumID='.$_GET['id'].'&amp;CatID='.$CategoryID.'"/>'."\n\r";
 $Two = $Two.'<item>'."\n\r".'<title>'.$TopicName.'</title>'."\n\r".'<description>'.$TopicName.'</description>'."\n\r".'<link>'.$BoardURL.'Topic.php?id='.$TopicID.'&amp;ForumID='.$_GET['id'].'&amp;CatID='.$CategoryID.'</link>'."\n\r".'</item>'."\n\r";
 ++$i; }
@@ -51,7 +51,7 @@ header('Content-Disposition: attachment; filename="'.$Settings['board_name'].'.x
    <link><?php echo $BoardURL; ?></link>
    <language>en-us</language>
    <generator>Edit Plus v2.12</generator>
-   <copyright>Game Maker 2k© 2004</copyright>
+   <copyright>Game Maker 2kï¿œ 2004</copyright>
    <ttl>120</ttl>
    <image>
 	<url><?php echo $BoardURL; ?>Pics/xml.gif</url>
@@ -60,4 +60,4 @@ header('Content-Disposition: attachment; filename="'.$Settings['board_name'].'.x
    </image>
  <?php echo "\n\r".$Two."\n\r"; ?></channel>
 </rss>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>

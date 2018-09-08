@@ -29,8 +29,8 @@ if ($File3Name==$FileName||$File3Name=="/".$FileName) {
 CheckFile("Kernel.php");
 require('Zlib.php');
 function ConnectMysql($sqlhost,$sqluser,$sqlpass,$sqldb) {
-$StatSQL = mysql_connect($sqlhost,$sqluser,$sqlpass,null,'MYSQL_CLIENT_COMPRESS');
-$StatBase = @mysql_select_db($sqldb);
+$StatSQL = mysqli_connect($sqlhost,$sqluser,$sqlpass,null,'MYSQL_CLIENT_COMPRESS');
+$StatBase = @mysqli_select_db($sqldb);
 }
 function GMTimeChange($format,$timestamp,$offset)
 {
@@ -86,37 +86,37 @@ $reformatted = preg_replace("/^\s*([0-9]{1,2})[\/\. -]+([0-9]{1,2})[\/\. -]+([0-
 return strtotime($reformatted);
 }
 function CountPosts($idc,$idf,$sqlt) {
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $cpquery = $safesql->query("select * from ".$sqlt."Posts where CategoryID=%s and ForumID=%s", array($idc,$idf));
 unset($safesql);
-$cpresult=mysql_query($cpquery);
-$cpnum=mysql_num_rows($cpresult);
+$cpresult=mysqli_query($cpquery);
+$cpnum=mysqli_num_rows($cpresult);
 return $cpnum;
 }
 function CountReplys($idc,$idf,$idt,$sqlt) {
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $crquery = $safesql->query("select * from ".$sqlt."Posts where CategoryID=%s and ForumID=%s and TopicID=%s", array($idc,$idf,$idt));
 unset($safesql);
-$crresult=mysql_query($crquery);
-$crnum=mysql_num_rows($crresult);
+$crresult=mysqli_query($crquery);
+$crnum=mysqli_num_rows($crresult);
 return $crnum;
 }
 function GetUserName($idu,$sqlt) {
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $gunquery = $safesql->query("select * from ".$sqlt."Members where id=%s", array($idu));
 unset($safesql);
-$gunresult=mysql_query($gunquery);
-$gunnum=mysql_num_rows($gunresult);
+$gunresult=mysqli_query($gunquery);
+$gunnum=mysqli_num_rows($gunresult);
 if($gunnum>0){
-$UsersName=mysql_result($gunresult,$gunnum-1,"Name"); }
+$UsersName=mysqli_result($gunresult,$gunnum-1,"Name"); }
 return $UsersName;
 }
 function CountTopics($idc,$idf,$sqlt) {
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $ctquery = $safesql->query("select * from ".$sqlt."Topics where CategoryID=%s and ForumID=%s", array($idc,$idf));
 unset($safesql);
-$ctresult=mysql_query($ctquery);
-$ctnum=mysql_num_rows($ctresult);
+$ctresult=mysqli_query($ctquery);
+$ctnum=mysqli_num_rows($ctresult);
 return $ctnum;
 }
 function PassHash2x($Text)

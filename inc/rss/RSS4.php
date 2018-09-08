@@ -31,17 +31,17 @@ if ($_GET['id']==null) {
 if ($_GET['SubID']==null) {
 	$_GET['SubID']=0; }
 echo '<?xml version="1.0" encoding="iso-8859-15"?>'."\n\r";
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $query = $safesql->query("select * from ".$Settings['sqltable']."Categorys where ShowCategory='Yes' and InSubForum=%s ORDER BY ID", array($_GET['SubID']));
-$preresult1=mysql_query($query);
-$num=mysql_num_rows($preresult1);
+$preresult1=mysqli_query($query);
+$num=mysqli_num_rows($preresult1);
 unset($safesql);
 $prei1=0;
 while ($prei1 < $num) {
-$CategoryID=mysql_result($preresult1,$prei1,"ID");
-$CategoryName=mysql_result($preresult1,$prei1,"Name");
-$CategoryShow=mysql_result($preresult1,$prei1,"ShowCategory");
-$CategoryDescription=mysql_result($preresult1,$prei1,"Description");
+$CategoryID=mysqli_result($preresult1,$prei1,"ID");
+$CategoryName=mysqli_result($preresult1,$prei1,"Name");
+$CategoryShow=mysqli_result($preresult1,$prei1,"ShowCategory");
+$CategoryDescription=mysqli_result($preresult1,$prei1,"Description");
 $One = $One.'<rdf:li rdf:resource="'.$BoardURL.'Category.php?id='.$CategoryID.'&amp;SubID='.$_GET['SubID'].'"/>'."\n\r";
 $Two = $Two.'<item>'."\n\r".'<title>'.$CategoryName.'</title>'."\n\r".'<description>'.$CategoryDescription.'</description>'."\n\r".'<link>'.$BoardURL.'Category.php?id='.$CategoryID.'&amp;SubID='.$_GET['SubID'].'</link>'."\n\r".'</item>'."\n\r";
 ++$prei1; } ?>
@@ -52,7 +52,7 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$CategoryName.'</title>'."\n\r".'<descript
    <link><?php echo $BoardURL; ?></link>
    <language>en-us</language>
    <generator>Edit Plus v2.12</generator>
-   <copyright>Game Maker 2k© 2004</copyright>
+   <copyright>Game Maker 2kï¿œ 2004</copyright>
    <ttl>120</ttl>
    <image>
 	<url><?php echo $BoardURL; ?>Pics/xml.gif</url>
@@ -61,4 +61,4 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$CategoryName.'</title>'."\n\r".'<descript
    </image>
  <?php echo "\n\r".$Two."\n\r"; ?></channel>
 </rss>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>

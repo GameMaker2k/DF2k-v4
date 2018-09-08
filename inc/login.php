@@ -17,10 +17,10 @@ if ($File3Name=="login.php"||$File3Name=="/login.php") {
 	require('index.html');
 	exit(); }
 if($_GET['act']=="logout") {
-session_unregister(MemberName);
-session_unregister(UserID);
-session_unregister(UserTimeZone);
-session_unregister(UserGroup);
+unset($_SESSION['MemberName']);
+unset($_SESSION['UserID']);
+unset($_SESSION['UserTimeZone']);
+unset($_SESSION['UserGroup']);
 session_destroy();
 session_unset();
 setcookie("MemberName", null, mktime() - 3600);
@@ -76,25 +76,25 @@ if($_GET['act']=="login")
 <td class="TableRow4" colspan="2">&nbsp;</td>
 </tr>
 <?php } if($_POST['act']=="loginmember"){
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $YourName = stripcslashes(htmlentities($_POST['username'], ENT_QUOTES));
 $YourName = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $YourName);
 $YourPasswordMD5 = md5($_POST['userpass']);
 $YourPassword = sha1($YourPasswordMD5);
 $querylog = $safesql->query("select * from ".$Settings['sqltable']."Members where Name = '%s' and Password='%s'", array($YourName,$YourPassword));
-$resultlog=mysql_query($querylog);
-$numlog=mysql_num_rows($resultlog);
+$resultlog=mysqli_query($querylog);
+$numlog=mysqli_num_rows($resultlog);
 if($numlog>=1) {
 $i=0;
-$YourIDM=mysql_result($resultlog,$i,"id");
-$YourNameM=mysql_result($resultlog,$i,"Name");
-$YourPassM=mysql_result($resultlog,$i,"Password");
-$YourGroupM=mysql_result($resultlog,$i,"Group");
-$YourTimeZoneM=mysql_result($resultlog,$i,"TimeZone");
+$YourIDM=mysqli_result($resultlog,$i,"id");
+$YourNameM=mysqli_result($resultlog,$i,"Name");
+$YourPassM=mysqli_result($resultlog,$i,"Password");
+$YourGroupM=mysqli_result($resultlog,$i,"Group");
+$YourTimeZoneM=mysqli_result($resultlog,$i,"TimeZone");
 $NewDay=GMTimeSend(null);
 $NewIP=$_SERVER['REMOTE_ADDR'];
 $queryup = $safesql->query("update ".$Settings['sqltable']."Members set LastActive=%s,IP='%s' WHERE id=%s", array($NewDay,$NewIP,$YourIDM));
-mysql_query($queryup);
+mysqli_query($queryup);
 session_destroy();
 setcookie(session_name(), '', mktime() - 3600);
 //session_regenerate_id();

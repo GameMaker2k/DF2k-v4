@@ -30,7 +30,7 @@ if(!is_numeric($_GET['CatID']))
 { $_GET['CatID']="1"; }
 if($_GET['act']=="View")
 { require('inc/replys.php'); }
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

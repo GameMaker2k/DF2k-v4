@@ -120,10 +120,10 @@ if($_GET['act']=="signup")
 <?php
 $Name = stripcslashes(htmlentities($_POST['Name'], ENT_QUOTES));
 $Name = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Name);
-$sql_email_check = mysql_query("SELECT Email FROM ".$Settings['sqltable']."Members WHERE Email='".$Email."'"); 
-$sql_username_check = mysql_query("SELECT Name FROM ".$Settings['sqltable']."Members WHERE Name='".$Name."'");
-$email_check = mysql_num_rows($sql_email_check); 
-$username_check = mysql_num_rows($sql_username_check);
+$sql_email_check = mysqli_query("SELECT Email FROM ".$Settings['sqltable']."Members WHERE Email='".$Email."'"); 
+$sql_username_check = mysqli_query("SELECT Name FROM ".$Settings['sqltable']."Members WHERE Name='".$Name."'");
+$email_check = mysqli_num_rows($sql_email_check); 
+$username_check = mysqli_num_rows($sql_username_check);
 if ($_POST['TOS']!="Agree") { $Error="Yes";  ?>
 <tr>
 	<td><br />You need to  agree to the tos.<br /></td>
@@ -164,16 +164,16 @@ $Password = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Password);
 $Avatar = stripcslashes(htmlentities($_POST['Avatar'], ENT_QUOTES));
 $Website = stripcslashes(htmlentities($_POST['Website'], ENT_QUOTES));
 $query = $safesql->query("insert into ".$Settings['sqltable']."Members values (null,'%s','%s','%s','%s','0','%s','%s','%s','%s','%s','%s','100x100','%s','%s','%s','%s')", array($Name,$NewPassword,$Email,$_POST['Group'],$_POST['Interests'],$_POST['Title'],$_POST['Joined'],$_POST['LastActive'],$NewSignature,$Avatar,$Website,$_POST['PostCount'],$_POST['YourOffSet'],$_POST['UserIP']));
-mysql_query($query);
+mysqli_query($query);
 $querylogr = $safesql->query("select * from ".$Settings['sqltable']."Members where Name='%s' AND Password='%s'", array($Name,$NewPassword));
-$resultlogr=mysql_query($querylogr);
-$numlogr=mysql_num_rows($resultlogr);
+$resultlogr=mysqli_query($querylogr);
+$numlogr=mysqli_num_rows($resultlogr);
 if($numlogr>=1) {
 $ir=0;
-$YourIDMr=mysql_result($resultlogr,$ir,"id");
-$YourNameMr=mysql_result($resultlogr,$ir,"Name");
-$YourGroupMr=mysql_result($resultlogr,$ir,"Group");
-$YourTimeZoneMr=mysql_result($resultlogr,$ir,"TimeZone"); }
+$YourIDMr=mysqli_result($resultlogr,$ir,"id");
+$YourNameMr=mysqli_result($resultlogr,$ir,"Name");
+$YourGroupMr=mysqli_result($resultlogr,$ir,"Group");
+$YourTimeZoneMr=mysqli_result($resultlogr,$ir,"TimeZone"); }
 session_destroy();
 setcookie(session_name(), '', mktime() - 3600);
 //session_regenerate_id();
@@ -191,7 +191,7 @@ $PMTitle = "Welcome ".$Name.".";
 $YourMessage = "Hello ".$Name.". Welcome to ".$Settings['board_name'].". I hope you have fun here. ^_^ ";
 $_POST['YourDate'] = $_POST['Joined'];
 $query = $safesql->query("insert into ".$Settings['sqltable']."Messenger values (null,%s,%s,'%s','%s',%s,0)", array($YourPMID,$SendPMtoID,$PMTitle,$YourMessage,$_POST['YourDate']));
-mysql_query($query);
+mysqli_query($query);
 ?>
 <tr>
 	<td><br />Welcome to the Board <?php echo $_SESSION['MemberName']; ?>. ^_^<br />

@@ -19,23 +19,28 @@ if ($File3Name=="Act.php"||$File3Name=="/Act.php") {
 /* 
 $_GET_Test is same as $_GET['Test'];
 */ 
-import_request_variables("g", "_GET_");
+//import_request_variables("g", "_GET_");
+extract($_GET_, EXTR_PREFIX_ALL, 'g');
 /* 
 $_POST_Test is same as $_POST['Test'];
 */ 
-import_request_variables("p", "_POST_");
+//import_request_variables("p", "_POST_");
+extract($_POST_, EXTR_PREFIX_ALL, 'p');
 /* 
 $_COOKIE_Test is same as $_COOKIE['Test'];
 */ 
-import_request_variables("c", "_COOKIE_");
+//import_request_variables("c", "_COOKIE_");
+extract($_COOKIE_, EXTR_PREFIX_ALL, 'c');
 /* 
 $_GET2_Test will get both $_POST['Test'] and $_GET['Test'] but will use $_GET['Test'] If they both have a Value.
 */
-import_request_variables("pg", "_GET2_");
+//import_request_variables("pg", "_GET2_");
+extract($_GET2_, EXTR_PREFIX_ALL, 'pg');
 /* 
 $_POST2_Test will get both $_POST['Test'] and $_GET['Test'] but will use $_POST['Test'] If they both have a Value.
 */
-import_request_variables("gp", "_POST2_");
+//import_request_variables("gp", "_POST2_");
+extract($_POST2_, EXTR_PREFIX_ALL, 'gp');
 /*$_SESSION['DF2kVer']="v3.3.T<!-- Renee Sabonis -->";
 $_SESSION['DF2kPreVer']="&nbsp;Beta 4";*/
 if ($_GET['act']==null&&$_GET['action']!=null) { $_GET['act']=$_GET['action']; }

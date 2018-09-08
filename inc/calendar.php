@@ -26,20 +26,20 @@ $MyMonth = GMTimeGet("m",$YourOffSet);
 $MyMonthName = GMTimeGet("F",$YourOffSet);
 $FirstDayThisMouth = date("w", mktime(0, 0, 0, $MyMonth, 1, $MyYear));
 $query = $safesql->query("select * from ".$Settings['sqltable']."Events where EventMouth<=%s and EventMouthEnd>=%s and EventYear<=%s and EventYearEnd>=%s", array($MyMonth,$MyMonth,$MyYear,$MyYear));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $is=0;
 while ($is < $num) {
-$EventID=mysql_result($result,$is,"ID");
-$EventUser=mysql_result($result,$is,"UserID");
-$EventName=mysql_result($result,$is,"EventName");
-$EventText=mysql_result($result,$is,"EventText");
-$EventMouth=mysql_result($result,$is,"EventMouth");
-$EventMouthEnd=mysql_result($result,$is,"EventMouthEnd");
-$EventDay=mysql_result($result,$is,"EventDay");
-$EventDayEnd=mysql_result($result,$is,"EventDayEnd");
-$EventYear=mysql_result($result,$is,"EventYear");
-$EventYearEnd=mysql_result($result,$is,"EventYearEnd");
+$EventID=mysqli_result($result,$is,"ID");
+$EventUser=mysqli_result($result,$is,"UserID");
+$EventName=mysqli_result($result,$is,"EventName");
+$EventText=mysqli_result($result,$is,"EventText");
+$EventMouth=mysqli_result($result,$is,"EventMouth");
+$EventMouthEnd=mysqli_result($result,$is,"EventMouthEnd");
+$EventDay=mysqli_result($result,$is,"EventDay");
+$EventDayEnd=mysqli_result($result,$is,"EventDayEnd");
+$EventYear=mysqli_result($result,$is,"EventYear");
+$EventYearEnd=mysqli_result($result,$is,"EventYearEnd");
 if ($EventsName[$EventDay] != null) {
 	$EventsName[$EventDay] .= ",\n\r<a href=\"Event.php?act=Event&amp;id=".$EventID."\" style=\"font-size: 9px;\" title=\"View Event ".$EventName.".\">".$EventName."</a>";	 }
 if ($EventsName[$EventDay] == null) {

@@ -10,15 +10,15 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $querylog2 = $safesql->query("select * from ".$Settings['sqltable']."Members where Name = '%s' and Password='%s'", array($_COOKIE['MemberName'],$_COOKIE['SessPass']));
-$resultlog2=mysql_query($querylog2);
-$numlog2=mysql_num_rows($resultlog2);
+$resultlog2=mysqli_query($querylog2);
+$numlog2=mysqli_num_rows($resultlog2);
 if($numlog2>=1) {
 $il=0;
-$YourIDAM=mysql_result($resultlog2,$il,"id");
-$YourGroupAM=mysql_result($resultlog2,$il,"Group");
-$YourTimeZoneAM=mysql_result($resultlog2,$il,"TimeZone");
+$YourIDAM=mysqli_result($resultlog2,$il,"id");
+$YourGroupAM=mysqli_result($resultlog2,$il,"Group");
+$YourTimeZoneAM=mysqli_result($resultlog2,$il,"TimeZone");
 $_SESSION['MemberName']=$_COOKIE['MemberName'];
 $_SESSION['UserID']=$YourIDAM;
 setcookie("UserID", $YourIDAM, time() + (7 * 86400));

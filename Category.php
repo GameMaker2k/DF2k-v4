@@ -29,7 +29,7 @@ if(!is_numeric($_GET['SubID']))
 { $_GET['SubID']="0"; }
 if($_GET['act']=="View")
 { require('inc/categorys.php'); }
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

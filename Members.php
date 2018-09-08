@@ -37,7 +37,7 @@ require('inc/register.php'); } }
 </table>
 <ins><br /></ins>
 <?php
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

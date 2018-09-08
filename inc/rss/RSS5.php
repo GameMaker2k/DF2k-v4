@@ -36,22 +36,22 @@ $MyYear = GMTimeGet("Y",$YourOffSet);
 $MyMonth = GMTimeGet("m",$YourOffSet);
 $MyMonthName = GMTimeGet("F",$YourOffSet);
 $FirstDayThisMouth = date("w", mktime(0, 0, 0, $MyMonth, 1, $MyYear));
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $query = $safesql->query("select * from ".$Settings['sqltable']."Events WHERE (EventMouth<='%s' and EventMouthEnd>='%s' and EventYear<='%s' and EventYearEnd>='%s') ORDER BY ID", array($MyMonth,$MyMonth,$MyYear,$MyYear));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 while ($i < $num) {
-$EventID=mysql_result($result,$i,"ID");
-$EventUser=mysql_result($result,$i,"UserID");
-$EventName=mysql_result($result,$i,"EventName");
-$EventText=mysql_result($result,$i,"EventText");
-$EventMouth=mysql_result($result,$i,"EventMouth");
-$EventMouthEnd=mysql_result($result,$i,"EventMouthEnd");
-$EventDay=mysql_result($result,$i,"EventDay");
-$EventDayEnd=mysql_result($result,$i,"EventDayEnd");
-$EventYear=mysql_result($result,$i,"EventYear");
-$EventYearEnd=mysql_result($result,$i,"EventYearEnd");
+$EventID=mysqli_result($result,$i,"ID");
+$EventUser=mysqli_result($result,$i,"UserID");
+$EventName=mysqli_result($result,$i,"EventName");
+$EventText=mysqli_result($result,$i,"EventText");
+$EventMouth=mysqli_result($result,$i,"EventMouth");
+$EventMouthEnd=mysqli_result($result,$i,"EventMouthEnd");
+$EventDay=mysqli_result($result,$i,"EventDay");
+$EventDayEnd=mysqli_result($result,$i,"EventDayEnd");
+$EventYear=mysqli_result($result,$i,"EventYear");
+$EventYearEnd=mysqli_result($result,$i,"EventYearEnd");
 $One = $One.'<rdf:li rdf:resource="'.$BoardURL.'Event.php?id='.$EventID.'"/>'."\n\r";
 $Two = $Two.'<item>'."\n\r".'<title>'.$EventName.'</title>'."\n\r".'<description>Event Starts at '.$EventMouth.'/'.$EventDay.'/'.$EventYear.' and ends at '.$EventMouthEnd.'/'.$EventDayEnd.'/'.$EventYearEnd.'</description>'."\n\r".'<link>'.$BoardURL.'Event.php?act=View&amp;id='.$EventID.'</link>'."\n\r".'</item>'."\n\r";
 ++$i; } ?>
@@ -62,7 +62,7 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$EventName.'</title>'."\n\r".'<description
    <description>RSS Feed of the Events on Board <?php echo $Settings['board_name']; ?></description>
    <language>en-us</language>
    <generator>Edit Plus v2.12</generator>
-   <copyright>Game Maker 2k© 2004</copyright>
+   <copyright>Game Maker 2kï¿½ 2004</copyright>
    <ttl>120</ttl>  
    <image>
 	<url><?php echo $BoardURL; ?>Pics/xml.gif</url>
@@ -71,4 +71,4 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$EventName.'</title>'."\n\r".'<description
    </image>
  <?php echo "\n\r".$Two."\n\r"; ?></channel>
 </rss>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>

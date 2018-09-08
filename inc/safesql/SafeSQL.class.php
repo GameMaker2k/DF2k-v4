@@ -231,18 +231,18 @@ class SafeSQL_MySQL extends SafeSQL {
 			}
 			return $_newvar;
 		}
-		if(function_exists('mysql_real_escape_string')) {
+		if(function_exists('mysqli_real_escape_string')) {
 			if(!isset($this->_link_id)) {
-				return mysql_real_escape_string($var);
+				return mysqli_real_escape_string($var);
 			} else {
-				return mysql_real_escape_string($var, $this->_link_id);
+				return mysqli_real_escape_string($var, $this->_link_id);
 			}
-		} elseif(function_exists('mysql_escape_string')) {
-			return mysql_escape_string($var);
+		} elseif(function_exists('mysqli_escape_string')) {
+			return mysqli_escape_string($var);
 		} else {
 			return addslashes($var);
 		}	
-		break;
+		return false;
 	}	
 }
 
@@ -267,7 +267,7 @@ class SafeSQL_ANSI extends SafeSQL {
 			return $_newvar;
 		}
 		return str_replace("'", "''", $var);
-		break;
+		return false;
 	}	
 }
 

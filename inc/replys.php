@@ -16,13 +16,13 @@ $File3Name=str_replace($File1Name, null, $File2Name);
 if ($File3Name=="replys.php"||$File3Name=="/replys.php") {
 	require('index.html');
 	exit(); }
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 $prequery = $safesql->query("select * from ".$Settings['sqltable']."Topics where ID=%s", array($_GET['id']));
-$preresult=mysql_query($prequery);
-$prenum=mysql_num_rows($preresult);
+$preresult=mysqli_query($prequery);
+$prenum=mysqli_num_rows($preresult);
 $prei=0;
 while ($prei < $prenum) {
-$TopicName=mysql_result($preresult,$prei,"TopicName");
+$TopicName=mysqli_result($preresult,$prei,"TopicName");
 ++$prei; }
 ?>
 <table width="100%" class="Table2">
@@ -39,44 +39,44 @@ $TopicName=mysql_result($preresult,$prei,"TopicName");
 </tr>
 <?php
 $query = $safesql->query("select * from ".$Settings['sqltable']."Posts where TopicID=%s AND ForumID=%s and CategoryID=%s ORDER BY TimeStamp", array($_GET['id'],$_GET['ForumID'],$_GET['CatID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 if($num==0) { header("Location: index.php?act=View"); }
 while ($i < $num) {
-$MyPostID=mysql_result($result,$i,"ID");
-$MyTopicID=mysql_result($result,$i,"TopicID");
-$MyForumID=mysql_result($result,$i,"ForumID");
-$MyCategoryID=mysql_result($result,$i,"CategoryID");
-$MyUserID=mysql_result($result,$i,"UserID");
-$MyGuestName=mysql_result($result,$i,"GuestName");
-$MyTimeStamp=mysql_result($result,$i,"TimeStamp");
+$MyPostID=mysqli_result($result,$i,"ID");
+$MyTopicID=mysqli_result($result,$i,"TopicID");
+$MyForumID=mysqli_result($result,$i,"ForumID");
+$MyCategoryID=mysqli_result($result,$i,"CategoryID");
+$MyUserID=mysqli_result($result,$i,"UserID");
+$MyGuestName=mysqli_result($result,$i,"GuestName");
+$MyTimeStamp=mysqli_result($result,$i,"TimeStamp");
 $MyTimeStamp=GMTimeChange("M j, Y, g:i a",$MyTimeStamp,$YourOffSet);
-$MyPost=mysql_result($result,$i,"Post");
+$MyPost=mysqli_result($result,$i,"Post");
 $requery = $safesql->query("select * from ".$Settings['sqltable']."Members where ID=%s", array($MyUserID));
-$reresult=mysql_query($requery);
-$renum=mysql_num_rows($reresult);
+$reresult=mysqli_query($requery);
+$renum=mysqli_num_rows($reresult);
 $rei=0;
 while ($rei < $renum) {
 $User1ID=$MyUserID;
-$User1Name=mysql_result($reresult,$rei,"Name");
-$User1Email=mysql_result($reresult,$rei,"Email");
-$User1Title=mysql_result($reresult,$rei,"Title");
-$User1Joined=mysql_result($reresult,$rei,"Joined");
+$User1Name=mysqli_result($reresult,$rei,"Name");
+$User1Email=mysqli_result($reresult,$rei,"Email");
+$User1Title=mysqli_result($reresult,$rei,"Title");
+$User1Joined=mysqli_result($reresult,$rei,"Joined");
 $User1Joined=GMTimeChange("M j, Y, g:i a",$User1Joined,$YourOffSet);
-$User1Group=mysql_result($reresult,$rei,"Group");
-$User1Signature=mysql_result($reresult,$rei,"Signature");
-$User1Avatar=mysql_result($reresult,$rei,"Avatar");
-$User1AvatarSize=mysql_result($reresult,$rei,"AvatarSize");
+$User1Group=mysqli_result($reresult,$rei,"Group");
+$User1Signature=mysqli_result($reresult,$rei,"Signature");
+$User1Avatar=mysqli_result($reresult,$rei,"Avatar");
+$User1AvatarSize=mysqli_result($reresult,$rei,"AvatarSize");
 if ($User1Avatar=="http://"||$User1Avatar==null) {
 $User1Avatar=$SkinSet['NoAvatar'];
 $User1AvatarSize=$SkinSet['NoAvatarSize']; }
 $AvatarSize1=explode("x", $User1AvatarSize);
 $AvatarSize1W=$AvatarSize1[0];
 $AvatarSize1H=$AvatarSize1[1];
-$User1Website=mysql_result($reresult,$rei,"Website");
-$User1PostCount=mysql_result($reresult,$rei,"PostCount");
-$User1IP=mysql_result($reresult,$rei,"IP");
+$User1Website=mysqli_result($reresult,$rei,"Website");
+$User1PostCount=mysqli_result($reresult,$rei,"PostCount");
+$User1IP=mysqli_result($reresult,$rei,"IP");
 ++$rei; }
 if($User1ID==2) { $User1Name=$MyGuestName;
 if($User1Name==null) { $User1Name="Guest"; } }

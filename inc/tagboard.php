@@ -18,12 +18,12 @@ if ($File3Name=="tagboard.php"||$File3Name=="/tagboard.php") {
 	exit(); }
 /*	Toggle Code	*/
 $query2 = $safesql->query("select * from ".$Settings['sqltable'].$filename, array());
-$result2=mysql_query($query2);
-$num2=mysql_num_rows($result2);
+$result2=mysqli_query($query2);
+$num2=mysqli_num_rows($result2);
 $i2=0;
 $toggle="";
 while ($i2 < $num2) {
-$IDT=mysql_result($result2,$i2,"ID");
+$IDT=mysqli_result($result2,$i2,"ID");
 $i3=$i2+1;
 if ($i3!=$num2) {
 $toggle=$toggle."toggletag('".$filename.$IDT."'),"; }
@@ -43,14 +43,14 @@ $toggle=$toggle."toggletag('".$filename."'),toggletag('".$filename."end')"; }
 </tr>
 <?php
 $query = $safesql->query("select * from ".$Settings['sqltable'].$filename, array());
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 while ($i < $num) {
-$IDT=mysql_result($result,$i,"ID");
-$UsersID=mysql_result($result,$i,"UserID");
-$GuestName=mysql_result($result,$i,"GuestName");
-$Post=mysql_result($result,$i,"Post");
+$IDT=mysqli_result($result,$i,"ID");
+$UsersID=mysqli_result($result,$i,"UserID");
+$GuestName=mysqli_result($result,$i,"GuestName");
+$Post=mysqli_result($result,$i,"Post");
 $UsersName = GetUserName($UsersID,$Settings['sqltable']);
 if($UsersName=="Guest") { $UsersName=$GuestName;
 if($UsersName==null) { $UsersName="Guest"; } } ?>

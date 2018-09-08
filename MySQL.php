@@ -61,7 +61,7 @@ if($_COOKIE['SessPass']!=null&&
 $_COOKIE['MemberName']!=null) {
 require('inc/prelogin.php');
 } }
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 //Time Zone Set
 if($_SESSION['UserTimeZone']!=null) {
 $YourOffSet = $_SESSION['UserTimeZone']; }

@@ -26,7 +26,7 @@ if($_GET['act']==null)
 { $_GET['act']="View"; }
 if($_GET['act']=="View")
 { require('inc/boards.php'); }
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

@@ -29,7 +29,7 @@ if(!is_numeric($_GET['CatID']))
 { $_GET['CatID']="1"; }
 if($_GET['act']=="View")
 { require('inc/topics.php'); } 
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

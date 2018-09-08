@@ -16,52 +16,52 @@ $File3Name=str_replace($File1Name, null, $File2Name);
 if ($File3Name=="events.php"||$File3Name=="/events.php") {
 	require('index.html');
 	exit(); }
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 if($_GET['act']=="View"||$_GET['act']==null) {
 $query = $safesql->query("select * from ".$Settings['sqltable']."Events where ID=%s", array($_GET['id']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $is=0;
 if($num==0) { header("Location: index.php?act=View"); }
 while ($is < $num) {
-$EventID=mysql_result($result,$is,"ID");
-$EventUser=mysql_result($result,$is,"UserID");
-$EventName=mysql_result($result,$is,"EventName");
-$EventText=mysql_result($result,$is,"EventText");
-$EventMouth=mysql_result($result,$is,"EventMouth");
-$EventMouthEnd=mysql_result($result,$is,"EventMouthEnd");
-$EventDay=mysql_result($result,$is,"EventDay");
-$EventDayEnd=mysql_result($result,$is,"EventDayEnd");
-$EventYear=mysql_result($result,$is,"EventYear");
-$EventYearEnd=mysql_result($result,$is,"EventYearEnd");
+$EventID=mysqli_result($result,$is,"ID");
+$EventUser=mysqli_result($result,$is,"UserID");
+$EventName=mysqli_result($result,$is,"EventName");
+$EventText=mysqli_result($result,$is,"EventText");
+$EventMouth=mysqli_result($result,$is,"EventMouth");
+$EventMouthEnd=mysqli_result($result,$is,"EventMouthEnd");
+$EventDay=mysqli_result($result,$is,"EventDay");
+$EventDayEnd=mysqli_result($result,$is,"EventDayEnd");
+$EventYear=mysqli_result($result,$is,"EventYear");
+$EventYearEnd=mysqli_result($result,$is,"EventYearEnd");
 $EventStartTS = Time_UnixStamp($EventMouth."/".$EventDay."/".$EventYear);
 $EventEndTS = Time_UnixStamp($EventMouthEnd."/".$EventDayEnd."/".$EventYearEnd);
 $EventStart = GMTimeChange("M. j Y",$EventStartTS,null);
 $EventEnd = GMTimeChange("M. j Y",$EventEndTS,null);
 $requery = $safesql->query("select * from ".$Settings['sqltable']."Members where ID=%s", array($EventUser));
-$reresult=mysql_query($requery);
-$renum=mysql_num_rows($reresult);
+$reresult=mysqli_query($requery);
+$renum=mysqli_num_rows($reresult);
 $rei=0;
 while ($rei < $renum) {
 $User1ID=$MyUserID;
-$User1Name=mysql_result($reresult,$rei,"Name");
-$User1Email=mysql_result($reresult,$rei,"Email");
-$User1Title=mysql_result($reresult,$rei,"Title");
-$User1Joined=mysql_result($reresult,$rei,"Joined");
+$User1Name=mysqli_result($reresult,$rei,"Name");
+$User1Email=mysqli_result($reresult,$rei,"Email");
+$User1Title=mysqli_result($reresult,$rei,"Title");
+$User1Joined=mysqli_result($reresult,$rei,"Joined");
 $User1Joined=GMTimeChange("M j, Y, g:i a",$User1Joined,$YourOffSet);
-$User1Group=mysql_result($reresult,$rei,"Group");
-$User1Signature=mysql_result($reresult,$rei,"Signature");
-$User1Avatar=mysql_result($reresult,$rei,"Avatar");
-$User1AvatarSize=mysql_result($reresult,$rei,"AvatarSize");
+$User1Group=mysqli_result($reresult,$rei,"Group");
+$User1Signature=mysqli_result($reresult,$rei,"Signature");
+$User1Avatar=mysqli_result($reresult,$rei,"Avatar");
+$User1AvatarSize=mysqli_result($reresult,$rei,"AvatarSize");
 if ($User1Avatar=="http://"||$User1Avatar==null) {
 $User1Avatar=$SkinSet['NoAvatar'];
 $User1AvatarSize=$SkinSet['NoAvatarSize']; }
 $AvatarSize1=explode("x", $User1AvatarSize);
 $AvatarSize1W=$AvatarSize1[0];
 $AvatarSize1H=$AvatarSize1[1];
-$User1Website=mysql_result($reresult,$rei,"Website");
-$User1PostCount=mysql_result($reresult,$rei,"PostCount");
-$User1IP=mysql_result($reresult,$rei,"IP");
+$User1Website=mysqli_result($reresult,$rei,"Website");
+$User1PostCount=mysqli_result($reresult,$rei,"PostCount");
+$User1IP=mysqli_result($reresult,$rei,"IP");
 ++$rei; }
 ++$is; }
 ?>

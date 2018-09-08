@@ -17,22 +17,22 @@ if ($File3Name=="subforums.php"||$File3Name=="/subforums.php") {
 	require('index.html');
 	exit(); }
 $prequery = $safesql->query("select * from ".$Settings['sqltable']."Categorys where ShowCategory='Yes' and ID='%s' and InSubForum=0 ORDER BY ID", array($_GET['CatID']));
-$preresult=mysql_query($prequery);
-$prenum=mysql_num_rows($preresult);
+$preresult=mysqli_query($prequery);
+$prenum=mysqli_num_rows($preresult);
 $prei=0;
 while ($prei < $prenum) {
-$CategoryID=mysql_result($preresult,$prei,"ID");
-$CategoryName=mysql_result($preresult,$prei,"Name");
-$CategoryShow=mysql_result($preresult,$prei,"ShowCategory");
-$CategoryDescription=mysql_result($preresult,$prei,"Description");
+$CategoryID=mysqli_result($preresult,$prei,"ID");
+$CategoryName=mysqli_result($preresult,$prei,"Name");
+$CategoryShow=mysqli_result($preresult,$prei,"ShowCategory");
+$CategoryDescription=mysqli_result($preresult,$prei,"Description");
 /*	Toggle Code	*/
 $query2 = $safesql->query("select * from ".$Settings['sqltable']."Forums where ShowForum='Yes' and CategoryID='%s' and InSubForum='%s' ORDER BY ID", array($CategoryID,$_GET['id']));
-$result2=mysql_query($query2);
-$num2=mysql_num_rows($result2);
+$result2=mysqli_query($query2);
+$num2=mysqli_num_rows($result2);
 $i2=0;
 $toggle="";
 while ($i2 < $num2) {
-$ForumID=mysql_result($result2,$i2,"ID");
+$ForumID=mysqli_result($result2,$i2,"ID");
 $i3=$i2+1;
 if ($i3!=$num2) {
 $toggle=$toggle."toggletag('Forum".$ForumID."'),"; }
@@ -48,8 +48,8 @@ $toggle=$toggle."toggletag('Cat".$CategoryID."'),toggletag('CatEnd".$CategoryID.
 </tr>
 <?php
 $query="SELECT * FROM ".$Settings['sqltable']."Forums WHERE (ShowForum='Yes' and CategoryID='$CategoryID' and InSubForum=".$_GET['id'].") ORDER BY ID";
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 if($num>=1) {
 ?>
@@ -62,22 +62,22 @@ if($num>=1) {
 </tr>
 <?php }
 while ($i < $num) {
-$ForumID=mysql_result($result,$i,"ID");
-$ForumName=mysql_result($result,$i,"Name");
-$ForumShow=mysql_result($result,$i,"ShowForum");
-$ForumType=mysql_result($result,$i,"ForumType");
-$ForumDescription=mysql_result($result,$i,"Description");
+$ForumID=mysqli_result($result,$i,"ID");
+$ForumName=mysqli_result($result,$i,"Name");
+$ForumShow=mysqli_result($result,$i,"ShowForum");
+$ForumType=mysqli_result($result,$i,"ForumType");
+$ForumDescription=mysqli_result($result,$i,"Description");
 unset($LastTopic);
 $gltquery = $safesql->query("select * from ".$Settings['sqltable']."Topics where CategoryID=%s and ForumID=%s ORDER BY LastUpdate", array($CategoryID,$ForumID));
-$gltresult=mysql_query($gltquery);
-$gltnum=mysql_num_rows($gltresult);
+$gltresult=mysqli_query($gltquery);
+$gltnum=mysqli_num_rows($gltresult);
 if($gltnum>0){
-$TopicID=mysql_result($gltresult,$gltnum-1,"ID");
-$TopicName=mysql_result($gltresult,$gltnum-1,"TopicName");
+$TopicID=mysqli_result($gltresult,$gltnum-1,"ID");
+$TopicName=mysqli_result($gltresult,$gltnum-1,"TopicName");
 $TopicName1 = substr($TopicName,0,15);
 if (strlen($TopicName)>12) { $TopicName1 = $TopicName1."..."; }
-$UsersID=mysql_result($gltresult,$gltnum-1,"UserID");
-$GuestName=mysql_result($gltresult,$gltnum-1,"GuestName");
+$UsersID=mysqli_result($gltresult,$gltnum-1,"UserID");
+$GuestName=mysqli_result($gltresult,$gltnum-1,"GuestName");
 $UsersName = GetUserName($UsersID,$Settings['sqltable']);
 $UsersName1 = substr($UsersName,0,18);
 if($UsersName=="Guest") { $UsersName=$GuestName;
@@ -118,20 +118,20 @@ if($num>=1) {
 <table class="Table1" width="100%">
 <?php
 $prequery = $safesql->query("select * from ".$Settings['sqltable']."Forums where CategoryID=%s and ID=%s", array($_GET['CatID'],$_GET['id']));
-$preresult=mysql_query($prequery);
-$prenum=mysql_num_rows($preresult);
+$preresult=mysqli_query($prequery);
+$prenum=mysqli_num_rows($preresult);
 $prei=0;
 while ($prei < $prenum) {
-$ForumID=mysql_result($preresult,$prei,"ID");
-$ForumName=mysql_result($preresult,$prei,"Name");
+$ForumID=mysqli_result($preresult,$prei,"ID");
+$ForumName=mysqli_result($preresult,$prei,"Name");
 /*	Toggle Code	*/
 $query2 = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY ID", array($_GET['id'],$_GET['CatID']));
-$result2=mysql_query($query2);
-$num2=mysql_num_rows($result2);
+$result2=mysqli_query($query2);
+$num2=mysqli_num_rows($result2);
 $i2=0;
 $toggle="";
 while ($i2 < $num2) {
-$TopicID=mysql_result($result2,$i2,"ID");
+$TopicID=mysqli_result($result2,$i2,"ID");
 $i3=$i2+1;
 if ($i3!=$num2) {
 $toggle=$toggle."toggletag('Topic".$TopicID."'),"; }
@@ -156,28 +156,28 @@ $toggle=$toggle."toggletag('Forum".$_GET['id']."'),toggletag('ForumEnd');"; }
 </tr>
 <?php
 $query = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY Pinned DESC, LastUpdate DESC", array($_GET['id'],$_GET['CatID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 while ($i < $num) {
-$TopicID=mysql_result($result,$i,"ID");
-$UsersID=mysql_result($result,$i,"UserID");
-$GuestName=mysql_result($result,$i,"GuestName");
-$TheTime=mysql_result($result,$i,"TimeStamp");
+$TopicID=mysqli_result($result,$i,"ID");
+$UsersID=mysqli_result($result,$i,"UserID");
+$GuestName=mysqli_result($result,$i,"GuestName");
+$TheTime=mysqli_result($result,$i,"TimeStamp");
 $TheTime=GMTimeChange("F j, Y, g:i a",$TheTime,$YourOffSet);
-$TopicName=mysql_result($result,$i,"TopicName");
-$PinnedTopic=mysql_result($result,$i,"Pinned");
-$TopicStat=mysql_result($result,$i,"Closed");
+$TopicName=mysqli_result($result,$i,"TopicName");
+$PinnedTopic=mysqli_result($result,$i,"Pinned");
+$TopicStat=mysqli_result($result,$i,"Closed");
 $UsersName = GetUserName($UsersID,$Settings['sqltable']);
 if($UsersName=="Guest") { $UsersName=$GuestName; }
 $glrquery="SELECT * FROM ".$Settings['sqltable']."Posts WHERE (CategoryID=".$_GET['CatID']." and ForumID=".$_GET['id']." and TopicID=".$TopicID.") ORDER BY TimeStamp";
-$glrresult=mysql_query($glrquery);
-$glrnum=mysql_num_rows($glrresult);
+$glrresult=mysqli_query($glrquery);
+$glrnum=mysqli_num_rows($glrresult);
 if($glrnum>0){
-$ReplyID1=mysql_result($glrresult,$glrnum-1,"ID");
-$UsersID1=mysql_result($glrresult,$glrnum-1,"UserID");
-$GuestName1=mysql_result($glrresult,$glrnum-1,"GuestName");
-$TimeStamp1=mysql_result($glrresult,$glrnum-1,"TimeStamp");
+$ReplyID1=mysqli_result($glrresult,$glrnum-1,"ID");
+$UsersID1=mysqli_result($glrresult,$glrnum-1,"UserID");
+$GuestName1=mysqli_result($glrresult,$glrnum-1,"GuestName");
+$TimeStamp1=mysqli_result($glrresult,$glrnum-1,"TimeStamp");
 $TimeStamp1=GMTimeChange("M j, Y, g:i a",$TimeStamp1,$YourOffSet);
 $UsersName1 = GetUserName($UsersID1,$Settings['sqltable']); }
 if($UsersName1=="Guest") { $UsersName1=$GuestName1; }

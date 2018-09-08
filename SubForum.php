@@ -28,7 +28,7 @@ if(!is_numeric($_GET['id']))
 { $_GET['id']="1"; }
 if($_GET['act']=="View")
 { require('inc/subforums.php'); }
-mysql_close();
+mysqli_close();
 echo $Endpage;
 ?>
 </body>

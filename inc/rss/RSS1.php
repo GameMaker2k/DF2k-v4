@@ -29,22 +29,22 @@ header('Content-Disposition: attachment; filename="'.$Settings['board_name'].'.x
 if ($_GET['id']==null) {
 	$_GET['id']=0; }
 echo '<?xml version="1.0" encoding="iso-8859-15"?>'."\n\r";
-$safesql =& new SafeSQL_MySQL;
+$safesql = new SafeSQL_MySQL;
 if ($_GET['CatID']==null) {
 $query = $safesql->query("select * from ".$Settings['sqltable']."Forums where ShowForum='Yes' and InSubForum=%s ORDER BY ID", array($_GET['id'])); }
 if ($_GET['CatID']!=null) {
 $query = $safesql->query("select * from ".$Settings['sqltable']."Forums where ShowForum='Yes' and InSubForum=%s and CategoryID=%s ORDER BY ID", array($_GET['id'],$_GET['CatID'])); }
 unset($safesql);
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($query);
+$num=mysqli_num_rows($result);
 $i=0;
 while ($i < $num) {
-$ForumID=mysql_result($result,$i,"ID");
-$CategoryID=mysql_result($result,$i,"CategoryID");
-$ForumName=mysql_result($result,$i,"Name");
-$ForumShow=mysql_result($result,$i,"ShowForum");
-$ForumType=mysql_result($result,$i,"ForumType");
-$ForumDescription=mysql_result($result,$i,"Description");
+$ForumID=mysqli_result($result,$i,"ID");
+$CategoryID=mysqli_result($result,$i,"CategoryID");
+$ForumName=mysqli_result($result,$i,"Name");
+$ForumShow=mysqli_result($result,$i,"ShowForum");
+$ForumType=mysqli_result($result,$i,"ForumType");
+$ForumDescription=mysqli_result($result,$i,"Description");
 $One = $One.'<rdf:li rdf:resource="'.$BoardURL.$ForumType.'.php?id='.$ForumID.'&amp;CatID='.$CategoryID.'"/>'."\n\r";
 $Two = $Two.'<item>'."\n\r".'<title>'.$ForumName.'</title>'."\n\r".'<description>'.$ForumDescription.'</description>'."\n\r".'<link>'.$BoardURL.$ForumType.'.php?id='.$ForumID.'&amp;CatID='.$CategoryID.'</link>'."\n\r".'</item>'."\n\r";
 ++$i; } ?>
@@ -55,7 +55,7 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$ForumName.'</title>'."\n\r".'<description
    <link><?php echo $BoardURL; ?></link>
    <language>en-us</language>
    <generator>Edit Plus v2.12</generator>
-   <copyright>Game Maker 2k© 2004</copyright>
+   <copyright>Game Maker 2kï¿œ 2004</copyright>
    <ttl>120</ttl>
    <image>
 	<url><?php echo $BoardURL; ?>Pics/xml.gif</url>
@@ -64,4 +64,4 @@ $Two = $Two.'<item>'."\n\r".'<title>'.$ForumName.'</title>'."\n\r".'<description
    </image>
  <?php echo "\n\r".$Two."\n\r"; ?></channel>
 </rss>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>
