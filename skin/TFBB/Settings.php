@@ -1,4 +1,5 @@
 <?php
+
 $SkinSet['SkinName'] = "TFBB Skin";
 $SkinSet['SkinMaker'] = "Jcink";
 $SkinSet['MakerURL'] = "http://Jcink.com/";
@@ -28,4 +29,3 @@ $SkinSet['ForumIcon'] = "<div style=\"text-align: center;\"><img src=\"skin/TFBB
 $SkinSet['TitleIcon'] = null;
 $SkinSet['NoAvatar'] = "skin/TFBB/NoAvatar.png";
 $SkinSet['NoAvatarSize'] = "100x100";
-?>

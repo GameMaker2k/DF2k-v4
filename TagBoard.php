@@ -12,8 +12,8 @@
 */
 require('Preindex.php');
 //This is Where You Put The Name of This File and Your Board Name
-$filename="TagBoard";
-$boardname=$Settings['board_name'];
+$filename = "TagBoard";
+$boardname = $Settings['board_name'];
 ?>
 
 <title> <?php echo $Settings['board_name']." (Powered by ".$TB2k.")"; ?> </title>
@@ -24,10 +24,12 @@ require('inc/navbar.php');
 ?>
 <ins><br /></ins>
 <?php
-if($_GET['act']==null)
-{ $_GET['act']="View"; }
-if($_GET['act']=="View")
-{ require('inc/tagboard.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "View";
+}
+if ($_GET['act'] == "View") {
+    require('inc/tagboard.php');
+}
 mysqli_close();
 echo $Endpage;
 ?>

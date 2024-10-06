@@ -1,4 +1,5 @@
 <?php
+
 $SkinSet['SkinName'] = "DF2k Skin";
 $SkinSet['SkinMaker'] = "Cool Dude 2k";
 $SkinSet['MakerURL'] = "http://cooldude2k.co.funpic.org/";
@@ -28,4 +29,3 @@ $SkinSet['ForumIcon'] = "<div style=\"text-align: center;\">[&yen;]</div>";
 $SkinSet['TitleIcon'] = null;
 $SkinSet['NoAvatar'] = "skin/DF2k/NoAvatar.png";
 $SkinSet['NoAvatarSize'] = "100x100";
-?>

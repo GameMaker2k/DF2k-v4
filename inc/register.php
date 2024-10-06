@@ -12,12 +12,12 @@
 */
 $File1Name = dirname($_SERVER['PHP_SELF'])."/";
 $File2Name = $_SERVER['PHP_SELF'];
-$File3Name=str_replace($File1Name, null, $File2Name);
-if ($File3Name=="register.php"||$File3Name=="/register.php") {
-	require('index.html');
-	exit(); }
-if($_GET['act']=="signup")
-{ ?>
+$File3Name = str_replace($File1Name, null, $File2Name);
+if ($File3Name == "register.php" || $File3Name == "/register.php") {
+    require('index.html');
+    exit();
+}
+if ($_GET['act'] == "signup") { ?>
 <tr class="TableRow1">
 <td class="TableRow1" colspan="2"><span class="textright"><a href="#Toggle" onclick="<?php echo $toggle; ?>"><?php echo $SkinSet['Toggle']; ?></a><?php echo $SkinSet['ToggleExt']; ?></span>
 <?php echo $SkinSet['TitleIcon'] ?><a href="Members.php?act=signup">Register</a></td>
@@ -104,9 +104,9 @@ if($_GET['act']=="signup")
 <tr class="TableRow4">
 <td class="TableRow4" colspan="2">&nbsp;</td>
 </tr>
-<?php } if($_GET['act']=="makemember") {
-	if($_POST['act']=="makemembers") {
-?>
+<?php } if ($_GET['act'] == "makemember") {
+    if ($_POST['act'] == "makemembers") {
+        ?>
 <tr class="TableRow1">
 <td class="TableRow1" colspan="2"><span class="textright"><a href="#Toggle" onclick="<?php echo $toggle; ?>"><?php echo $SkinSet['Toggle']; ?></a>&nbsp;</span>
 &nbsp;<a href="Members.php?act=signup">Register</a></td>
@@ -118,81 +118,90 @@ if($_GET['act']=="signup")
 <td class="TableRow3">
 <table style="width: 100%; height: 25%; text-align: center;">
 <?php
-$Name = stripcslashes(htmlentities($_POST['Name'], ENT_QUOTES));
-$Name = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Name);
-$sql_email_check = mysqli_query("SELECT Email FROM ".$Settings['sqltable']."Members WHERE Email='".$Email."'"); 
-$sql_username_check = mysqli_query("SELECT Name FROM ".$Settings['sqltable']."Members WHERE Name='".$Name."'");
-$email_check = mysqli_num_rows($sql_email_check); 
-$username_check = mysqli_num_rows($sql_username_check);
-if ($_POST['TOS']!="Agree") { $Error="Yes";  ?>
+        $Name = stripcslashes(htmlentities($_POST['Name'], ENT_QUOTES));
+        $Name = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Name);
+        $sql_email_check = mysqli_query("SELECT Email FROM ".$Settings['sqltable']."Members WHERE Email='".$Email."'");
+        $sql_username_check = mysqli_query("SELECT Name FROM ".$Settings['sqltable']."Members WHERE Name='".$Name."'");
+        $email_check = mysqli_num_rows($sql_email_check);
+        $username_check = mysqli_num_rows($sql_username_check);
+        if ($_POST['TOS'] != "Agree") {
+            $Error = "Yes";  ?>
 <tr>
 	<td><br />You need to  agree to the tos.<br /></td>
 </tr>
-<?php } if ($_POST['Name']==null) { $Error="Yes"; ?>
+<?php } if ($_POST['Name'] == null) {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />You need to enter a name.<br /></td>
 </tr>
-<?php } if ($_POST['Name']=="ShowMe") { $Error="Yes"; ?>
+<?php } if ($_POST['Name'] == "ShowMe") {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />You need to enter a name.<br /></td>
 </tr>
-<?php } if ($_POST['Password']==null) { $Error="Yes"; ?>
+<?php } if ($_POST['Password'] == null) {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />You need to enter a password.<br /></td>
 </tr>
-<?php } if ($_POST['Email']==null) { $Error="Yes"; ?>
+<?php } if ($_POST['Email'] == null) {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />You need to enter a email.<br /></td>
 </tr>
-<?php } if($email_check > 0) { $Error="Yes"; ?>
+<?php } if ($email_check > 0) {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />Email address is already used.<br /></td>
 </tr>
-<?php } if($username_check > 0) { $Error="Yes"; ?>
+<?php } if ($username_check > 0) {
+    $Error = "Yes"; ?>
 <tr>
 	<td><br />UserName is already used.<br /></td>
 </tr>
-<?php } if ($Error!="Yes") {
-$NewPasswordMD5 = md5($_POST['Password']);
-$NewPassword = sha1($NewPasswordMD5);
-$_GET['YourPost'] = $_POST['Signature'];
-//require( './misc/HTMLTags.php');
-$Signature = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Signature);
-$NewSignature = $_GET['YourPost'];
-$Password = stripcslashes(htmlentities($Password, ENT_QUOTES));
-$Password = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Password);
-$Avatar = stripcslashes(htmlentities($_POST['Avatar'], ENT_QUOTES));
-$Website = stripcslashes(htmlentities($_POST['Website'], ENT_QUOTES));
-$query = $safesql->query("insert into ".$Settings['sqltable']."Members values (null,'%s','%s','%s','%s','0','%s','%s','%s','%s','%s','%s','100x100','%s','%s','%s','%s')", array($Name,$NewPassword,$Email,$_POST['Group'],$_POST['Interests'],$_POST['Title'],$_POST['Joined'],$_POST['LastActive'],$NewSignature,$Avatar,$Website,$_POST['PostCount'],$_POST['YourOffSet'],$_POST['UserIP']));
-mysqli_query($query);
-$querylogr = $safesql->query("select * from ".$Settings['sqltable']."Members where Name='%s' AND Password='%s'", array($Name,$NewPassword));
-$resultlogr=mysqli_query($querylogr);
-$numlogr=mysqli_num_rows($resultlogr);
-if($numlogr>=1) {
-$ir=0;
-$YourIDMr=mysqli_result($resultlogr,$ir,"id");
-$YourNameMr=mysqli_result($resultlogr,$ir,"Name");
-$YourGroupMr=mysqli_result($resultlogr,$ir,"Group");
-$YourTimeZoneMr=mysqli_result($resultlogr,$ir,"TimeZone"); }
-session_destroy();
-setcookie(session_name(), '', mktime() - 3600);
-//session_regenerate_id();
-$_SESSION['MemberName']=$YourNameMr;
-$_SESSION['UserID']=$YourIDMr;
-$_SESSION['UserTimeZone']=$YourTimeZoneMr;
-$_SESSION['UserGroup']=$YourGroupMr;
-if($_POST['storecookie']==true) {
-setcookie("MemberName", $YourNameM, time() + (7 * 86400));
-setcookie("UserID", $YourIDM, time() + (7 * 86400));
-setcookie("SessPass", $YourPassM, time() + (7 * 86400)); }
-$SendPMtoID=$row[0];
-$YourPMID = 1;
-$PMTitle = "Welcome ".$Name.".";
-$YourMessage = "Hello ".$Name.". Welcome to ".$Settings['board_name'].". I hope you have fun here. ^_^ ";
-$_POST['YourDate'] = $_POST['Joined'];
-$query = $safesql->query("insert into ".$Settings['sqltable']."Messenger values (null,%s,%s,'%s','%s',%s,0)", array($YourPMID,$SendPMtoID,$PMTitle,$YourMessage,$_POST['YourDate']));
-mysqli_query($query);
-?>
+<?php } if ($Error != "Yes") {
+    $NewPasswordMD5 = md5($_POST['Password']);
+    $NewPassword = sha1($NewPasswordMD5);
+    $_GET['YourPost'] = $_POST['Signature'];
+    //require( './misc/HTMLTags.php');
+    $Signature = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Signature);
+    $NewSignature = $_GET['YourPost'];
+    $Password = stripcslashes(htmlentities($Password, ENT_QUOTES));
+    $Password = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $Password);
+    $Avatar = stripcslashes(htmlentities($_POST['Avatar'], ENT_QUOTES));
+    $Website = stripcslashes(htmlentities($_POST['Website'], ENT_QUOTES));
+    $query = $safesql->query("insert into ".$Settings['sqltable']."Members values (null,'%s','%s','%s','%s','0','%s','%s','%s','%s','%s','%s','100x100','%s','%s','%s','%s')", array($Name,$NewPassword,$Email,$_POST['Group'],$_POST['Interests'],$_POST['Title'],$_POST['Joined'],$_POST['LastActive'],$NewSignature,$Avatar,$Website,$_POST['PostCount'],$_POST['YourOffSet'],$_POST['UserIP']));
+    mysqli_query($query);
+    $querylogr = $safesql->query("select * from ".$Settings['sqltable']."Members where Name='%s' AND Password='%s'", array($Name,$NewPassword));
+    $resultlogr = mysqli_query($querylogr);
+    $numlogr = mysqli_num_rows($resultlogr);
+    if ($numlogr >= 1) {
+        $ir = 0;
+        $YourIDMr = mysqli_result($resultlogr, $ir, "id");
+        $YourNameMr = mysqli_result($resultlogr, $ir, "Name");
+        $YourGroupMr = mysqli_result($resultlogr, $ir, "Group");
+        $YourTimeZoneMr = mysqli_result($resultlogr, $ir, "TimeZone");
+    }
+    session_destroy();
+    setcookie(session_name(), '', mktime() - 3600);
+    //session_regenerate_id();
+    $_SESSION['MemberName'] = $YourNameMr;
+    $_SESSION['UserID'] = $YourIDMr;
+    $_SESSION['UserTimeZone'] = $YourTimeZoneMr;
+    $_SESSION['UserGroup'] = $YourGroupMr;
+    if ($_POST['storecookie'] == true) {
+        setcookie("MemberName", $YourNameM, time() + (7 * 86400));
+        setcookie("UserID", $YourIDM, time() + (7 * 86400));
+        setcookie("SessPass", $YourPassM, time() + (7 * 86400));
+    }
+    $SendPMtoID = $row[0];
+    $YourPMID = 1;
+    $PMTitle = "Welcome ".$Name.".";
+    $YourMessage = "Hello ".$Name.". Welcome to ".$Settings['board_name'].". I hope you have fun here. ^_^ ";
+    $_POST['YourDate'] = $_POST['Joined'];
+    $query = $safesql->query("insert into ".$Settings['sqltable']."Messenger values (null,%s,%s,'%s','%s',%s,0)", array($YourPMID,$SendPMtoID,$PMTitle,$YourMessage,$_POST['YourDate']));
+    mysqli_query($query);
+    ?>
 <tr>
 	<td><br />Welcome to the Board <?php echo $_SESSION['MemberName']; ?>. ^_^<br />
 	Click <a href="index.php?act=View">here</a> to continue to board.<br />&nbsp;</td>
@@ -203,4 +212,5 @@ mysqli_query($query);
 <tr class="TableRow4">
 <td class="TableRow4" colspan="2">&nbsp;</td>
 </tr>
-<?php } } ?>
+<?php }
+} ?>

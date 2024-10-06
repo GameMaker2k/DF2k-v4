@@ -21,14 +21,18 @@ require('inc/navbar.php');
 ?>
 <ins><br /></ins>
 <?php
-if($_GET['act']==null)
-{ $_GET['act']="View"; }
-if(!is_numeric($_GET['id']))
-{ $_GET['id']="1"; }
-if(!is_numeric($_GET['SubID']))
-{ $_GET['SubID']="0"; }
-if($_GET['act']=="View")
-{ require('inc/categorys.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "View";
+}
+if (!is_numeric($_GET['id'])) {
+    $_GET['id'] = "1";
+}
+if (!is_numeric($_GET['SubID'])) {
+    $_GET['SubID'] = "0";
+}
+if ($_GET['act'] == "View") {
+    require('inc/categorys.php');
+}
 mysqli_close();
 echo $Endpage;
 ?>

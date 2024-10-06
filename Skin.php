@@ -26,12 +26,15 @@
 <body>
 <?php
 if ($handle = opendir('./skin/')) {
-while (false != ($num = readdir($handle))) {
-if ($num != "." && $num != "..") {
-if (file_exists("skin/".$num."/Settings.php")) {
-include("skin/".$num."/Settings.php");
-echo "<a title=\"This skin was made by ".$SkinSet['SkinMaker']."\" href=\"index.php?Skin=".$num."\">".$SkinSet['SkinName']."</a> - <a title=\"".$SkinSet['SkinMaker']."'s Website\" href=\"".$SkinSet['MakerURL']."\">".$SkinSet['SkinMaker']."'s Website.</a><br />\n";
-} } } closedir($handle); }
+    while (false != ($num = readdir($handle))) {
+        if ($num != "." && $num != "..") {
+            if (file_exists("skin/".$num."/Settings.php")) {
+                include("skin/".$num."/Settings.php");
+                echo "<a title=\"This skin was made by ".$SkinSet['SkinMaker']."\" href=\"index.php?Skin=".$num."\">".$SkinSet['SkinName']."</a> - <a title=\"".$SkinSet['SkinMaker']."'s Website\" href=\"".$SkinSet['MakerURL']."\">".$SkinSet['SkinMaker']."'s Website.</a><br />\n";
+            }
+        }
+    } closedir($handle);
+}
 ?>
 </body>
 </html>

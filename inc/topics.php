@@ -12,10 +12,11 @@
 */
 $File1Name = dirname($_SERVER['PHP_SELF'])."/";
 $File2Name = $_SERVER['PHP_SELF'];
-$File3Name=str_replace($File1Name, null, $File2Name);
-if ($File3Name=="topics.php"||$File3Name=="/topics.php") {
-	require('index.html');
-	exit(); }
+$File3Name = str_replace($File1Name, null, $File2Name);
+if ($File3Name == "topics.php" || $File3Name == "/topics.php") {
+    require('index.html');
+    exit();
+}
 ?>
 <table width="100%" class="Table2">
 <tr>
@@ -27,34 +28,39 @@ if ($File3Name=="topics.php"||$File3Name=="/topics.php") {
 <table class="Table1" width="100%">
 <?php
 $prequery = $safesql->query("select * from ".$Settings['sqltable']."Forums where CategoryID=%s and ID=%s", array($_GET['CatID'],$_GET['id']));
-$preresult=mysqli_query($prequery);
-$prenum=mysqli_num_rows($preresult);
-$prei=0;
+$preresult = mysqli_query($prequery);
+$prenum = mysqli_num_rows($preresult);
+$prei = 0;
 while ($prei < $prenum) {
-$ForumID=mysqli_result($preresult,$prei,"ID");
-$ForumName=mysqli_result($preresult,$prei,"Name");
-/*	Toggle Code	*/
-$query2 = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY ID", array($_GET['id'],$_GET['CatID']));
-$result2=mysqli_query($query2);
-$num2=mysqli_num_rows($result2);
-$i2=0;
-$toggle="";
-while ($i2 < $num2) {
-$TopicID=mysqli_result($result2,$i2,"ID");
-$i3=$i2+1;
-if ($i3!=$num2) {
-$toggle=$toggle."toggletag('Topic".$TopicID."'),"; }
-if ($i3==$num2) {
-$toggle=$toggle."toggletag('Topic".$TopicID."'),"; }
-if ($i3==$num2) {
-$toggle=$toggle."toggletag('Forum".$_GET['id']."'),toggletag('ForumEnd');"; }
-++$i2; }
-?>
+    $ForumID = mysqli_result($preresult, $prei, "ID");
+    $ForumName = mysqli_result($preresult, $prei, "Name");
+    /*	Toggle Code	*/
+    $query2 = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY ID", array($_GET['id'],$_GET['CatID']));
+    $result2 = mysqli_query($query2);
+    $num2 = mysqli_num_rows($result2);
+    $i2 = 0;
+    $toggle = "";
+    while ($i2 < $num2) {
+        $TopicID = mysqli_result($result2, $i2, "ID");
+        $i3 = $i2 + 1;
+        if ($i3 != $num2) {
+            $toggle = $toggle."toggletag('Topic".$TopicID."'),";
+        }
+        if ($i3 == $num2) {
+            $toggle = $toggle."toggletag('Topic".$TopicID."'),";
+        }
+        if ($i3 == $num2) {
+            $toggle = $toggle."toggletag('Forum".$_GET['id']."'),toggletag('ForumEnd');";
+        }
+        ++$i2;
+    }
+    ?>
 <tr class="TableRow1">
 <td class="TableRow1" colspan="6"><span class="textright"><a href="#Toggle" onclick="<?php echo $toggle; ?>"><?php echo $SkinSet['Toggle']; ?></a><?php echo $SkinSet['ToggleExt']; ?></span>
 <?php echo $SkinSet['TitleIcon'] ?><a href="Forum.php?act=View&amp;id=<?php echo $ForumID; ?>&amp;CatID=<?php echo $_GET['CatID']; ?>#<?php echo $ForumID; ?>"><?php echo $ForumName; ?></a></td>
 </tr>
-<?php ++$prei; } ?>
+<?php ++$prei;
+} ?>
 <tr id="Forum<?php echo $ForumID; ?>" class="TableRow2">
 <th class="TableRow2" style="width: 5%;">State</th>
 <th class="TableRow2" style="width: 33%;">Topic Name</th>
@@ -65,47 +71,65 @@ $toggle=$toggle."toggletag('Forum".$_GET['id']."'),toggletag('ForumEnd');"; }
 </tr>
 <?php
 $query = $safesql->query("select * from ".$Settings['sqltable']."Topics where ForumID=%s and CategoryID=%s ORDER BY Pinned DESC, LastUpdate DESC", array($_GET['id'],$_GET['CatID']));
-$result=mysqli_query($query);
-$num=mysqli_num_rows($result);
-$i=0;
+$result = mysqli_query($query);
+$num = mysqli_num_rows($result);
+$i = 0;
 while ($i < $num) {
-$TopicID=mysqli_result($result,$i,"ID");
-$UsersID=mysqli_result($result,$i,"UserID");
-$GuestName=mysqli_result($result,$i,"GuestName");
-$TheTime=mysqli_result($result,$i,"TimeStamp");
-$TheTime=GMTimeChange("F j, Y, g:i a",$TheTime,$YourOffSet);
-$TopicName=mysqli_result($result,$i,"TopicName");
-$PinnedTopic=mysqli_result($result,$i,"Pinned");
-$TopicStat=mysqli_result($result,$i,"Closed");
-$UsersName = GetUserName($UsersID,$Settings['sqltable']);
-if($UsersName=="Guest") { $UsersName=$GuestName;
-if($UsersName==null) { $UsersName="Guest"; } }
-$glrquery = $safesql->query("select * from ".$Settings['sqltable']."Posts where CategoryID=%s and ForumID=%s and TopicID=%s ORDER BY TimeStamp", array($_GET['CatID'],$_GET['id'],$TopicID));
-$glrresult=mysqli_query($glrquery);
-$glrnum=mysqli_num_rows($glrresult);
-if($glrnum>0){
-$ReplyID1=mysqli_result($glrresult,$glrnum-1,"ID");
-$UsersID1=mysqli_result($glrresult,$glrnum-1,"UserID");
-$GuestName1=mysqli_result($glrresult,$glrnum-1,"GuestName");
-$TimeStamp1=mysqli_result($glrresult,$glrnum-1,"TimeStamp");
-$TimeStamp1=GMTimeChange("M j, Y, g:i a",$TimeStamp1,$YourOffSet);
-$UsersName1 = GetUserName($UsersID1,$Settings['sqltable']); }
-if($UsersName1=="Guest") { $UsersName1=$GuestName1;
-if($UsersName1==null) { $UsersName1="Guest"; } }
-if($TimeStamp1!=null) {
-$LastReply = "By: <a href=\"#".$UsersID1."\">".$UsersName1."</a><br />\nTime: ".$TimeStamp1; }
-if($TimeStamp1==null) { $LastReply = "&nbsp;<br />&nbsp;"; }
-if ($PinnedTopic==1) {
-	$PreTopic=$SkinSet['PinTopic']; }
-if ($TopicStat==1) {
-	$PreTopic=$SkinSet['ClosedTopic']; }
-if ($PinnedTopic==0) {
-	if ($TopicStat==0) {
-		$PreTopic=$SkinSet['TopicIcon']; } }
-if ($PinnedTopic==1) {
-	if ($TopicStat==1) {
-		$PreTopic=$SkinSet['PinClosedTopic']; } }
-?>
+    $TopicID = mysqli_result($result, $i, "ID");
+    $UsersID = mysqli_result($result, $i, "UserID");
+    $GuestName = mysqli_result($result, $i, "GuestName");
+    $TheTime = mysqli_result($result, $i, "TimeStamp");
+    $TheTime = GMTimeChange("F j, Y, g:i a", $TheTime, $YourOffSet);
+    $TopicName = mysqli_result($result, $i, "TopicName");
+    $PinnedTopic = mysqli_result($result, $i, "Pinned");
+    $TopicStat = mysqli_result($result, $i, "Closed");
+    $UsersName = GetUserName($UsersID, $Settings['sqltable']);
+    if ($UsersName == "Guest") {
+        $UsersName = $GuestName;
+        if ($UsersName == null) {
+            $UsersName = "Guest";
+        }
+    }
+    $glrquery = $safesql->query("select * from ".$Settings['sqltable']."Posts where CategoryID=%s and ForumID=%s and TopicID=%s ORDER BY TimeStamp", array($_GET['CatID'],$_GET['id'],$TopicID));
+    $glrresult = mysqli_query($glrquery);
+    $glrnum = mysqli_num_rows($glrresult);
+    if ($glrnum > 0) {
+        $ReplyID1 = mysqli_result($glrresult, $glrnum - 1, "ID");
+        $UsersID1 = mysqli_result($glrresult, $glrnum - 1, "UserID");
+        $GuestName1 = mysqli_result($glrresult, $glrnum - 1, "GuestName");
+        $TimeStamp1 = mysqli_result($glrresult, $glrnum - 1, "TimeStamp");
+        $TimeStamp1 = GMTimeChange("M j, Y, g:i a", $TimeStamp1, $YourOffSet);
+        $UsersName1 = GetUserName($UsersID1, $Settings['sqltable']);
+    }
+    if ($UsersName1 == "Guest") {
+        $UsersName1 = $GuestName1;
+        if ($UsersName1 == null) {
+            $UsersName1 = "Guest";
+        }
+    }
+    if ($TimeStamp1 != null) {
+        $LastReply = "By: <a href=\"#".$UsersID1."\">".$UsersName1."</a><br />\nTime: ".$TimeStamp1;
+    }
+    if ($TimeStamp1 == null) {
+        $LastReply = "&nbsp;<br />&nbsp;";
+    }
+    if ($PinnedTopic == 1) {
+        $PreTopic = $SkinSet['PinTopic'];
+    }
+    if ($TopicStat == 1) {
+        $PreTopic = $SkinSet['ClosedTopic'];
+    }
+    if ($PinnedTopic == 0) {
+        if ($TopicStat == 0) {
+            $PreTopic = $SkinSet['TopicIcon'];
+        }
+    }
+    if ($PinnedTopic == 1) {
+        if ($TopicStat == 1) {
+            $PreTopic = $SkinSet['PinClosedTopic'];
+        }
+    }
+    ?>
 <tr class="TableRow3" id="Topic<?php echo $TopicID; ?>">
 <td class="TableRow3"><?php echo $PreTopic; ?></td>
 <td class="TableRow3"><div class="topicname">
@@ -113,10 +137,11 @@ if ($PinnedTopic==1) {
 </div></td>
 <td class="TableRow3" style="text-align: center;"><a href="#<?php echo $UsersID; ?>"><?php echo $UsersName; ?></a></td>
 <td class="TableRow3" style="text-align: center;"><?php echo $TheTime; ?></td>
-<td class="TableRow3" style="text-align: center;"><?php echo CountReplys($_GET['CatID'],$_GET['id'],$TopicID,$Settings['sqltable'])-1; ?></td>
+<td class="TableRow3" style="text-align: center;"><?php echo CountReplys($_GET['CatID'], $_GET['id'], $TopicID, $Settings['sqltable']) - 1; ?></td>
 <td class="TableRow3"><?php echo $LastReply; ?></td>
 </tr>
-<?php ++$i; } ?>
+<?php ++$i;
+} ?>
 <tr id="ForumEnd" class="TableRow4">
 <td class="TableRow4" colspan="6">&nbsp;</td>
 </tr>

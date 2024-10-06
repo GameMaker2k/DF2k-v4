@@ -22,12 +22,15 @@ require('inc/navbar.php');
 ?>
 <ins><br /></ins>
 <?php
-if($_GET['act']==null)
-{ $_GET['act']="View"; }
-if(!is_numeric($_GET['id']))
-{ $_GET['id']="1"; }
-if($_GET['act']=="View")
-{ require('inc/subforums.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "View";
+}
+if (!is_numeric($_GET['id'])) {
+    $_GET['id'] = "1";
+}
+if ($_GET['act'] == "View") {
+    require('inc/subforums.php');
+}
 mysqli_close();
 echo $Endpage;
 ?>

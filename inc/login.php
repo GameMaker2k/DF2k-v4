@@ -12,33 +12,33 @@
 */
 $File1Name = dirname($_SERVER['PHP_SELF'])."/";
 $File2Name = $_SERVER['PHP_SELF'];
-$File3Name=str_replace($File1Name, null, $File2Name);
-if ($File3Name=="login.php"||$File3Name=="/login.php") {
-	require('index.html');
-	exit(); }
-if($_GET['act']=="logout") {
-unset($_SESSION['MemberName']);
-unset($_SESSION['UserID']);
-unset($_SESSION['UserTimeZone']);
-unset($_SESSION['UserGroup']);
-session_destroy();
-session_unset();
-setcookie("MemberName", null, mktime() - 3600);
-setcookie("UserID", null, mktime() - 3600);
-setcookie("SessPass", null, mktime() - 3600);
-$_SESSION['UserGroup']=null;
-$_SESSION['MemberName']=null;
-$_SESSION['UserID']=0;
-$_SESSION['UserTimeZone']=0;
-session_destroy();
-setcookie(session_name(), '', mktime() - 3600);
-//session_regenerate_id();
-//$_GET['act']="login";
-header("Location: Members.php?act=login");
+$File3Name = str_replace($File1Name, null, $File2Name);
+if ($File3Name == "login.php" || $File3Name == "/login.php") {
+    require('index.html');
+    exit();
 }
-if($_GET['act']=="login")
-{
-?>
+if ($_GET['act'] == "logout") {
+    unset($_SESSION['MemberName']);
+    unset($_SESSION['UserID']);
+    unset($_SESSION['UserTimeZone']);
+    unset($_SESSION['UserGroup']);
+    session_destroy();
+    session_unset();
+    setcookie("MemberName", null, mktime() - 3600);
+    setcookie("UserID", null, mktime() - 3600);
+    setcookie("SessPass", null, mktime() - 3600);
+    $_SESSION['UserGroup'] = null;
+    $_SESSION['MemberName'] = null;
+    $_SESSION['UserID'] = 0;
+    $_SESSION['UserTimeZone'] = 0;
+    session_destroy();
+    setcookie(session_name(), '', mktime() - 3600);
+    //session_regenerate_id();
+    //$_GET['act']="login";
+    header("Location: Members.php?act=login");
+}
+if ($_GET['act'] == "login") {
+    ?>
 <tr class="TableRow1">
 <td class="TableRow1" colspan="2"><span class="textright"><a href="#Toggle" onclick="<?php echo $toggle; ?>"><?php echo $SkinSet['Toggle']; ?></a><?php echo $SkinSet['ToggleExt']; ?></span>
 <?php echo $SkinSet['TitleIcon'] ?><a href="Members.php?act=login">Log in</a></td>
@@ -75,40 +75,41 @@ if($_GET['act']=="login")
 <tr class="TableRow4">
 <td class="TableRow4" colspan="2">&nbsp;</td>
 </tr>
-<?php } if($_POST['act']=="loginmember"){
-$safesql = new SafeSQL_MySQL;
-$YourName = stripcslashes(htmlentities($_POST['username'], ENT_QUOTES));
-$YourName = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $YourName);
-$YourPasswordMD5 = md5($_POST['userpass']);
-$YourPassword = sha1($YourPasswordMD5);
-$querylog = $safesql->query("select * from ".$Settings['sqltable']."Members where Name = '%s' and Password='%s'", array($YourName,$YourPassword));
-$resultlog=mysqli_query($querylog);
-$numlog=mysqli_num_rows($resultlog);
-if($numlog>=1) {
-$i=0;
-$YourIDM=mysqli_result($resultlog,$i,"id");
-$YourNameM=mysqli_result($resultlog,$i,"Name");
-$YourPassM=mysqli_result($resultlog,$i,"Password");
-$YourGroupM=mysqli_result($resultlog,$i,"Group");
-$YourTimeZoneM=mysqli_result($resultlog,$i,"TimeZone");
-$NewDay=GMTimeSend(null);
-$NewIP=$_SERVER['REMOTE_ADDR'];
-$queryup = $safesql->query("update ".$Settings['sqltable']."Members set LastActive=%s,IP='%s' WHERE id=%s", array($NewDay,$NewIP,$YourIDM));
-mysqli_query($queryup);
-session_destroy();
-setcookie(session_name(), '', mktime() - 3600);
-//session_regenerate_id();
-$_SESSION['MemberName']=$YourNameM;
-$_SESSION['UserID']=$YourIDM;
-$_SESSION['UserTimeZone']=$YourTimeZoneM;
-$_SESSION['UserGroup']=$YourGroupM;
-if($_POST['storecookie']==true) {
-setcookie("MemberName", $YourNameM, time() + (7 * 86400));
-setcookie("UserID", $YourIDM, time() + (7 * 86400));
-setcookie("SessPass", $YourPassM, time() + (7 * 86400)); }
-} if($numlog<=0) {
-//echo "Password was not right or user not found!! <_< ";
-} ?>
+<?php } if ($_POST['act'] == "loginmember") {
+    $safesql = new SafeSQL_MySQL();
+    $YourName = stripcslashes(htmlentities($_POST['username'], ENT_QUOTES));
+    $YourName = preg_replace("/\&amp;#(.*?);/is", "&#$1;", $YourName);
+    $YourPasswordMD5 = md5($_POST['userpass']);
+    $YourPassword = sha1($YourPasswordMD5);
+    $querylog = $safesql->query("select * from ".$Settings['sqltable']."Members where Name = '%s' and Password='%s'", array($YourName,$YourPassword));
+    $resultlog = mysqli_query($querylog);
+    $numlog = mysqli_num_rows($resultlog);
+    if ($numlog >= 1) {
+        $i = 0;
+        $YourIDM = mysqli_result($resultlog, $i, "id");
+        $YourNameM = mysqli_result($resultlog, $i, "Name");
+        $YourPassM = mysqli_result($resultlog, $i, "Password");
+        $YourGroupM = mysqli_result($resultlog, $i, "Group");
+        $YourTimeZoneM = mysqli_result($resultlog, $i, "TimeZone");
+        $NewDay = GMTimeSend(null);
+        $NewIP = $_SERVER['REMOTE_ADDR'];
+        $queryup = $safesql->query("update ".$Settings['sqltable']."Members set LastActive=%s,IP='%s' WHERE id=%s", array($NewDay,$NewIP,$YourIDM));
+        mysqli_query($queryup);
+        session_destroy();
+        setcookie(session_name(), '', mktime() - 3600);
+        //session_regenerate_id();
+        $_SESSION['MemberName'] = $YourNameM;
+        $_SESSION['UserID'] = $YourIDM;
+        $_SESSION['UserTimeZone'] = $YourTimeZoneM;
+        $_SESSION['UserGroup'] = $YourGroupM;
+        if ($_POST['storecookie'] == true) {
+            setcookie("MemberName", $YourNameM, time() + (7 * 86400));
+            setcookie("UserID", $YourIDM, time() + (7 * 86400));
+            setcookie("SessPass", $YourPassM, time() + (7 * 86400));
+        }
+    } if ($numlog <= 0) {
+        //echo "Password was not right or user not found!! <_< ";
+    } ?>
 <tr class="TableRow1">
 <td class="TableRow1" colspan="2"><span class="textright"><a href="#Toggle" onclick="<?php echo $toggle; ?>"><?php echo $SkinSet['Toggle']; ?></a>&nbsp;</span>
 &nbsp;<a href="Members.php?act=login">Log in</a></td>
@@ -119,12 +120,12 @@ setcookie("SessPass", $YourPassM, time() + (7 * 86400)); }
 <tr class="TableRow3">
 <td class="TableRow3">
 <table style="width: 100%; height: 25%; text-align: center;">
-<?php if($numlog>=1) { ?>
+<?php if ($numlog >= 1) { ?>
 <tr>
 	<td><br />Welcome to the Board <?php echo $_SESSION['MemberName']; ?>. ^_^<br />
 	Click <a href="index.php?act=View">here</a> to continue to board.<br />&nbsp;</td>
 </tr>
-<?php } if($numlog<=0) { ?>
+<?php } if ($numlog <= 0) { ?>
 <tr>
 	<td><br />Password was not right or user not found!! &lt;_&lt;<br />
 	Click <a href="Members.php?act=login">here</a> to try again.<br />&nbsp;</td>

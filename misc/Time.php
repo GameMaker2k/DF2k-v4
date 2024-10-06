@@ -49,9 +49,15 @@ color: #87CEEB;
 <tr>
 	<td>
 <?php
-if($_POST['time']==null) { $_POST['time'] = "Jan 24 2006 02:12 PM"; }
-if($_POST['timeformat']==null) { $_POST['timeformat'] = "F j, Y, g:i a"; }
-if($_POST['timezone']==null) { $_POST['timezone'] = "-6"; }
+if ($_POST['time'] == null) {
+    $_POST['time'] = "Jan 24 2006 02:12 PM";
+}
+if ($_POST['timeformat'] == null) {
+    $_POST['timeformat'] = "F j, Y, g:i a";
+}
+if ($_POST['timezone'] == null) {
+    $_POST['timezone'] = "-6";
+}
 ?>
 <form method="POST" action="?act=convert">
 Insert Time:<br /><input type="text" name="time" value="<?php echo $_POST['time']; ?>"><br />
@@ -61,12 +67,13 @@ Insert New TimeZone:<br /><input type="text" name="timezone" value="<?php echo $
 <input type="submit">
 </form><br />
 <?php
-if($_GET['act']=="convert"&&$_POST['act']=="convert") {
-echo "Time Change with GMDate(Changed to GMT then Time zone)<br />\n";
-echo "New Time: ".GMTimeChange($_POST['timeformat'],GMTime_UnixStamp($_POST['time']),$_POST['timezone'])."<br />\n";
-echo "Time Change with Date(Changed to Time zone)<br />\n";
-echo "New Time: ".TimeChange($_POST['timeformat'],GMTime_UnixStamp($_POST['time']),$_POST['timezone'])."<br />\n";
-echo "Unix Time Stamp w/o TimeZone: ".GMTime_UnixStamp($_POST['time'])."<br />\n"; }
+if ($_GET['act'] == "convert" && $_POST['act'] == "convert") {
+    echo "Time Change with GMDate(Changed to GMT then Time zone)<br />\n";
+    echo "New Time: ".GMTimeChange($_POST['timeformat'], GMTime_UnixStamp($_POST['time']), $_POST['timezone'])."<br />\n";
+    echo "Time Change with Date(Changed to Time zone)<br />\n";
+    echo "New Time: ".TimeChange($_POST['timeformat'], GMTime_UnixStamp($_POST['time']), $_POST['timezone'])."<br />\n";
+    echo "Unix Time Stamp w/o TimeZone: ".GMTime_UnixStamp($_POST['time'])."<br />\n";
+}
 ?>
 	</td>
 </tr>

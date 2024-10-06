@@ -12,35 +12,38 @@
 */
 $File1Name = dirname($_SERVER['PHP_SELF'])."/";
 $File2Name = $_SERVER['PHP_SELF'];
-$File3Name=str_replace($File1Name, null, $File2Name);
-if ($File3Name=="Zlib.php"||$File3Name=="/Zlib.php") {
-	require('index.html');
-	exit(); }
-
-function gunzip($infile, $outfile) {
-  $zp = gzopen($infile, "r");
-  while(!gzeof($zp))
-       $string .= gzread($zp, 4096);
-  gzclose($zp);
-  $fp = fopen($outfile, "w");
-  fwrite($fp, $string, strlen($string));
-  fclose($fp);
+$File3Name = str_replace($File1Name, null, $File2Name);
+if ($File3Name == "Zlib.php" || $File3Name == "/Zlib.php") {
+    require('index.html');
+    exit();
 }
 
-function gunzip2($infile, $outfile) {
- $string = implode("", gzfile($infile));
- $fp = fopen($outfile, "w");
- fwrite($fp, $string, strlen($string));
- fclose($fp);
+function gunzip($infile, $outfile)
+{
+    $zp = gzopen($infile, "r");
+    while (!gzeof($zp)) {
+        $string .= gzread($zp, 4096);
+    }
+    gzclose($zp);
+    $fp = fopen($outfile, "w");
+    fwrite($fp, $string, strlen($string));
+    fclose($fp);
+}
+
+function gunzip2($infile, $outfile)
+{
+    $string = implode("", gzfile($infile));
+    $fp = fopen($outfile, "w");
+    fwrite($fp, $string, strlen($string));
+    fclose($fp);
 }
 
 function gzip($infile, $outfile, $param = 5)
 {
- $fp = fopen($infile, "r");
- $data = fread ($fp, filesize($infile));
- fclose($fp);
- $zp = gzopen($outfile, "w".$param);
- gzwrite($zp, $data);
- gzclose($zp);
+    $fp = fopen($infile, "r");
+    $data = fread($fp, filesize($infile));
+    fclose($fp);
+    $zp = gzopen($outfile, "w".$param);
+    gzwrite($zp, $data);
+    gzclose($zp);
 }
-?>

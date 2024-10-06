@@ -20,16 +20,21 @@ require('inc/navbar.php');
 ?>
 <ins><br /></ins>
 <?php
-if($_GET['act']==null)
-{ $_GET['act']="View"; }
-if(!is_numeric($_GET['id']))
-{ $_GET['id']="1"; }
-if(!is_numeric($_GET['ForumID']))
-{ $_GET['ForumID']="1"; }
-if(!is_numeric($_GET['CatID']))
-{ $_GET['CatID']="1"; }
-if($_GET['act']=="View")
-{ require('inc/replys.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "View";
+}
+if (!is_numeric($_GET['id'])) {
+    $_GET['id'] = "1";
+}
+if (!is_numeric($_GET['ForumID'])) {
+    $_GET['ForumID'] = "1";
+}
+if (!is_numeric($_GET['CatID'])) {
+    $_GET['CatID'] = "1";
+}
+if ($_GET['act'] == "View") {
+    require('inc/replys.php');
+}
 mysqli_close();
 echo $Endpage;
 ?>

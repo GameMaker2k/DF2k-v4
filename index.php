@@ -22,10 +22,12 @@ require('inc/navbar.php');
 ?>
 <ins><br /></ins>
 <?php
-if($_GET['act']==null)
-{ $_GET['act']="View"; }
-if($_GET['act']=="View")
-{ require('inc/boards.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "View";
+}
+if ($_GET['act'] == "View") {
+    require('inc/boards.php');
+}
 mysqli_close();
 echo $Endpage;
 ?>
